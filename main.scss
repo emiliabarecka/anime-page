@@ -1,0 +1,28 @@
+body{
+    background-image: url(img/alBackGround.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+    height: 120vh;
+    color: rgb(183, 188, 191);
+}
+header{
+    background: rgb(23,22,24);
+    background: linear-gradient(27deg, rgba(23,22,24,1) 0%, rgba(138,143,143,1) 98%); 
+}
+.menu-link{
+    display: block;
+  }
+.container-fluid{
+    background-color: rgba(0, 0, 0, 0.545);
+    height: 120vh;
+}
+img{
+    border-radius: 10px;
+    box-shadow: 5px 5px 30px rgba(234, 230, 230, 0.72);
+}
+a>span{
+    color: rgb(183, 188, 191);
+}
+a>span:hover{
+    color: rgb(215, 221, 226);
+}
