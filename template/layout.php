@@ -1,3 +1,6 @@
+<?php
+
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -10,8 +13,8 @@
 </head>
 <body>
     <header>
-        <nav class="navbar navbar-dark navbar-expand-md ms-5 ">
-            <a href="/animePage" class="navbar-brand me-5"><img src= "img/logo_transparent.png" width="60" alt="logo" class="d-inline-block ms-5 me-2"><span class="ps-3">Best-anime.pl</span></a>
+        <nav class="navbar navbar-dark navbar-expand-md ">
+            <a href="/animePage" class="navbar-brand "><img src= "img/logo_transparent.png" width="40" alt="logo" class="d-inline-block ms-3 me-2"><span class="ps-3">Best-anime.pl</span></a>
             <button class="navbar-toggler me-2" type="button" data-toggle = "collapse" data-target = "#mainMenu">
                 <span class="navbar-toggler-icon"></span>
             </button>
@@ -26,24 +29,25 @@
                     </li>
                     <li class="nav-item">
                         <a href="#" class="nav-link dropdown-toggle h5 align-center ms-5" data-toggle="dropdown" role="button">Postacie</a>
-                    </li>
+                    </li>                    
                     <li class="nav-item">
-                        <a href="/animePage/?action=create" class="nav-link h5 align-center ms-5"  role="button">Dodaj</a>
+                        <a href="/animePage/?action=log" class="nav-link h5 align-center ms-5"  role="button">Zaloguj</a>
                     </li>
+                    
                 </ul>
             </div>
         </nav>
     </header>
     <div class="container-fluid pt-5">
     <div class="row">
-        <div class="d-none d-lg-block col-lg-2" > <img src="img/Wei.jpg" alt="zdjecie" class="img-fluid"></div>
+        <div class="d-none d-lg-block col-lg-2" > <img src="img/Wei.jpg" alt="zdjecie" class="img-fluid d-inline"></div>
         <div class="col-sm-12 col-lg-8 pb-5">
         <?php 
         //page jest widoczna bo layout includujemy w View
         require_once("template/pages/$page.php");
         ?>
         </div>
-        <div class="d-none d-lg-block col-lg-2" ><img src="img/Wangji.jpg" alt="zdjecie" class="img-fluid"></div>
+        <div class="d-none d-lg-block col-lg-2" ><img src="img/Wangji.jpg" alt="zdjecie" class="img-fluid d-inline"></div>
     </div>
     <div class="row">
         <div class="col text-center pt-5">STOPKA</div>

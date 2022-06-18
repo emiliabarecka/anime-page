@@ -12,51 +12,117 @@ class Controller{
     private const DEFAULT_ACTION = 'main';
     private array $request;
     private View $view;
+    private Database $database;
 
     //zamiast tworzyc polaczenie z bazą w kocntruktorze robimy metode statytczną
     public static function initConfiguration(array $configuration): void{
         self::$configuration = $configuration;
     }
+   
 
     public function __construct(array $request){
         if(empty(self::$configuration['db'])){
             throw new ConfigurationException('Configuration error');
         }
-        $db = new Database(self::$configuration['db']);
+        $this->database = new Database(self::$configuration['db']);
         $this->request = $request;
         $this->view = new View();   
-    }  
+    }
 
-    public function run(): void{
+
+    public function logIn(){
         
-        $viewParams = [];
-        
-//sprawdzamy co przyszlo z geta i sami okreslamy strone dla widoku
-    switch($this->action()){
-        case 'create':
-            $page = 'create';
-            //rozróżnienie wchodzimy na strone z formularzem(get)czy wysylamy(post)
-            $created = false;
-            $data = $this->getRequestPost();
-            if(!empty($data)){
-                $created = true;
-                $viewParams = [
-                    'title' => $data['title'],
-                    'desc' => $data['desc'],
-                    'desc2' => $data['desc2'],
-                    'characters' => $data['characters'],
-                    'eps' => $data['eps'],
-                    'img' => $data['img']
-                ];       
+        $password = $this->database->getPassword();
+    
+        $data = $this->getRequestPost();
+        $password2 = $data['log'];
+    
+        if(!empty($password2)){
+            // if(hash_equals($password['password'], ($password2))){
+            if(password_verify($password2, $password['password'])){
+                session_start();
+                $_SESSION['user_type'] = 'owner';
+            
+                
             }
-            //przekazujemy do widoku informacje, czy wchodzimy dopiero na formularz, czy juz go wysłalismy
-            $viewParams['created'] = $created;
+            else{
+                echo 'Nieprawidłowe hasło';
+                header('Location:/animePage/?action=log');
+                
+            }
+        }
+    }
+
+    public function run(): void{    
+        $viewParams = [];
+
+    //sprawdzamy co przyszlo z geta i sami okreslamy strone dla widoku
+    switch($this->action()){
+        case 'log':
+           
+            $pass = $this->getRequestPost()['log'] ?? null;
+
+            if($pass){
+
+                $this->request['get']['action'] = 'logIn';
+                $this->run();
+            } 
+            $page = 'log';
+                 
+        break;
+        case 'logIn':
+            $this->logIn();
+            if(isset($_SESSION) && $_SESSION['user_type'] === 'owner'){
+                $page = 'create';
+            }else{
+                $page = 'log';
+            }    
+        break;
+        case 'create':
+            if(isset($_SESSION) && $_SESSION['user_type'] === 'owner'){
+                $page = 'create';    
+                //rozróżnienie wchodzimy na strone z formularzem(get)czy wysylamy(post)
+                $data = $this->getRequestPost();
+                $img = $_FILES['img'] ?? null;
+               
+                if(!empty($data) || !empty($img)){
+                    $animeData = [
+                        'title' => $data['title'],
+                        'desc' => $data['desc'],
+                        'desc2' => $data['desc2'],
+                        'characters' => $data['characters'],
+                        'eps' => $data['eps'],
+                        'img' => $img,
+                        
+                    ];
+                   
+                    $this->database->createAnime($animeData);
+                    header('Location:/animePage/?before=created');          
+                }
+            }else{
+                $page = 'log';
+            }  
         break;
         case 'show':
             $page = 'show';
         break;
+        case 'edit':
+            $page = 'edit';
+            $viewParams = [
+                'animes' =>  $this->database->getAnimes()
+            ];
+        break;
         default:
             $page = 'main';
+            $data= $this->getRequestGet();
+            
+            //dobra sciezka bez upublicznienia struktory plikow
+            $upload_target_dir = basename(getcwd()."\uploaded");
+            $viewParams = [
+                'animes' =>  $this->database->getAnimes(),
+                'before' => $data['before'] ?? null,
+                'directory' => $upload_target_dir
+            ];
         break;
         }
         $this->view->render($page, $viewParams);
@@ -74,4 +140,5 @@ class Controller{
     private function getRequestGet(): array{
         return $this->request['get'] ?? [];
     }
+   
 }

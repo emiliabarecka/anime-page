@@ -1,9 +1,10 @@
 body{
     background-image: url(img/alBackGround.jpg);
-    background-repeat: no-repeat;
+    // background-repeat: no-repeat;
     background-size: cover;
-    height: 120vh;
+    
     color: rgb(183, 188, 191);
+    text-align: center;
 }
 header{
     background: rgb(23,22,24);
@@ -13,8 +14,7 @@ header{
     display: block;
   }
 .container-fluid{
-    background-color: rgba(0, 0, 0, 0.545);
-    height: 120vh;
+    background-color: rgba(0, 0, 0, 0.632);
 }
 img{
     border-radius: 10px;
@@ -25,4 +25,7 @@ a>span{
 }
 a>span:hover{
     color: rgb(215, 221, 226);
+}
+p{
+    text-align: justify;
 }
