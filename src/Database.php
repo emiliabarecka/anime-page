@@ -2,6 +2,8 @@
 declare (strict_types=1);
 namespace Ap;
 require_once('src/Exception/StorageException.php');
+require_once('src/Exception/NotFoundException.php');
+use Ap\Exception\NotFoundException;
 use Ap\Exception\StorageException;
 use App\Exception\ConfigurationException;
 use PDO;
@@ -32,10 +34,31 @@ class Database{
             throw new ConfigurationException("Nieprawidłowe hasło");
         }
     }
+    
+
+    public function getAnime(int $id): array{
+        try{
+            $query = "SELECT id, title, description_0, description_1, characters, episodes, image_name FROM animes WHERE id = $id";
+            $result = $this->conn->query($query);
+            $anime = $result->fetch(PDO::FETCH_ASSOC);    
+        }
+        catch(Throwable $e){
+            throw new StorageException('Nie ma takiej anime', 400, $e);
+        }
+        if(!$anime){
+            throw new NotFoundException("Anime o id: $id nie zostało znalezione");
+        }
+        $charactersString =  $anime['characters'];
+        $characterArray =  explode(",", $charactersString);
+        $anime['characters'] = $characterArray;
+        
+        $anime['episodes'] = explode("," , $anime['episodes'] ?? []);
+        return $anime;
+    }
 
     public function getAnimes(): array{
         try{
-            $query = "SELECT title, description_0, image_name FROM animes";
+            $query = "SELECT id, title, description_0, image_name FROM animes";
             $result = $this->conn->query($query);
             $animes = $result->fetchAll( PDO::FETCH_ASSOC);    
             return $animes;
@@ -72,7 +95,6 @@ class Database{
             $this->conn->exec($query);
         }
         catch (Throwable $e){
-            dump($e);
             throw new StorageException('Nie udało się dodać nowej anime do bazy');
         }
     }

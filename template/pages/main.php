@@ -1,31 +1,38 @@
     <div class="message my-2" style="color:green">
       <?php
-      if(!empty($params['before'])): ?>  
-      <?php 
-      switch($params['before']){
-        case 'created':
-          echo 'Dodano anime do bazy';
-        break;
-      } 
-       
+      if(!empty($params['before'])){
+        switch($params['before']){
+          case 'created':
+            echo 'Dodano anime do bazy';
+          break;
+        }
+      }
       ?>
-      <?php endif ?>
+    </div>   
+    <div class="error my-2" style="color:red; font-weight:700px; font-size:20px ">
+      <?php
+      if(!empty($params['error'])){
+        
+        switch($params['error']){
+          case 'animeNotFound':
+            echo 'Nie znaleziono anime o indeksie '.$params['id'];
+          break;
+        }
+      }   
+      ?>
     </div>
     <h1 class="text-center mb-5 h2">Najlepsze anime na początek</h1>
-    <h6>cos tam jak wspaniale jest anime, czemu warto goladac, czemu trzeba dobrze wybrac pierwszą, żeby nie odbić się od gatunku</h6>
+    <h6>cos tam jak wspaniale jest anime, czemu warto ogąladać, czemu trzeba dobrze wybrac pierwszą, żeby nie odbić się od gatunku</h6>
     <?php foreach($params['animes'] ?? [] as $anime):?>
-      <div class="row mt-5 obrazek">  
+      <div class="row mt-5">  
           <div class="col-3">
             <img src="<?php echo $params['directory'] . '\\' . $anime['image_name'] ?>" alt="img" class="img-fluid">
           </div>
           <div class="col-9 px-5">
+            <p hidden><?php echo (int)$anime['id']?></p>
             <h3><?php echo htmlentities($anime['title']) ?></h3>
             <p><?php echo htmlentities($anime['description_0']) ?></p>
-            <form action="/animePage/?action=edit" method="post">
-            
-            <button class=" btn btn-outline-secondary" type="submit">Więcej</button>
-            </form>
-            
+            <a href="/animePage/?action=show&id=<?php echo $anime['id']; ?>" role="button" class="btn btn-secondary">Więcej</a>    
         </div> 
       </div> 
     <?php endforeach;?>

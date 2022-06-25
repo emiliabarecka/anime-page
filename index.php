@@ -27,17 +27,13 @@ try{
 catch (ConfigurationException $e){
     echo '<h3>Błąd konfiguracji</h3>';
     echo 'Skontaktuj się z administratorem na adres e-mail : xxx@xxx.com';
-    dump($e);
 }
 catch (AppException $e){
     echo '<h3>Bład w aplikacji </h3>';
-    echo '<h5>'.$e->getMessage().'</h5>';
-    
+    echo '<h5>'.$e->getMessage().'</h5>';    
 }
 catch (Throwable $e){
     echo '<h3>Bład w aplikacji </h3>';
+    dump($e);
 }
-
-
-
 ?>

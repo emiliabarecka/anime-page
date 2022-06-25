@@ -1,9 +1,8 @@
 body {
   background-image: url(img/alBackGround.jpg);
-  background-repeat: no-repeat;
   background-size: cover;
-  height: 120vh;
   color: #b7bcbf;
+  text-align: center;
 }
 
 header {
@@ -16,8 +15,7 @@ header {
 }
 
 .container-fluid {
-  background-color: rgba(0, 0, 0, 0.545);
-  height: 120vh;
+  background-color: rgba(0, 0, 0, 0.632);
 }
 
 img {
@@ -33,4 +31,9 @@ a > span {
 a > span:hover {
   color: #d7dde2;
 }
+
+p {
+  text-align: justify;
+}
+
 /*# sourceMappingURL=main.css.map */

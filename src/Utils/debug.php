@@ -10,7 +10,9 @@ function dump($data){
     display:inline-block;
     padding:1px 10px;
     margin:5px;
-    border: 1px solid black;">
+    border: 1px solid black;
+    background-color:black;
+    color:white;">
     <pre>';
     print_r($data);
     echo'</pre>

@@ -2,6 +2,7 @@
 declare(strict_types=1);
 namespace Ap;
 
+use Ap\Exception\NotFoundException;
 use App\Exception\ConfigurationException;
 require_once('src/Exception/ConfigurationException.php');
 require_once('src/View.php');
@@ -33,26 +34,21 @@ class Controller{
     public function logIn(){
         
         $password = $this->database->getPassword();
-    
         $data = $this->getRequestPost();
-        $password2 = $data['log'];
+        $password2 = $data['password'];
     
         if(!empty($password2)){
-            // if(hash_equals($password['password'], ($password2))){
             if(password_verify($password2, $password['password'])){
                 session_start();
-                $_SESSION['user_type'] = 'owner';
-            
-                
+                $_SESSION['user_type'] = 'owner';    
             }
             else{
                 echo 'Nieprawidłowe hasło';
-                header('Location:/animePage/?action=log');
-                
+                header('Location:/animePage/?action=log');    
             }
         }
     }
-
+  
     public function run(): void{    
         $viewParams = [];
 
@@ -60,7 +56,7 @@ class Controller{
     switch($this->action()){
         case 'log':
            
-            $pass = $this->getRequestPost()['log'] ?? null;
+            $pass = $this->getRequestPost()['password'] ?? null;
 
             if($pass){
 
@@ -105,12 +101,29 @@ class Controller{
         break;
         case 'show':
             $page = 'show';
+            $data = $this->getRequestGet();
+            $noteId = (int)($data['id'] ?? null);
+            
+            try{
+               $anime = $this->database->getAnime($noteId);
+            }
+            catch (NotFoundException $e){
+                header('Location:/animePage/?error=animeNotFound&id='."$noteId");
+                exit;
+            }
+            $viewParams = [
+                'anime' => $anime
+            ];
         break;
         case 'edit':
             $page = 'edit';
+            $data = $this->getRequestGet();
+            $noteId = (int)$data['id'];
             $viewParams = [
-                'animes' =>  $this->database->getAnimes()
+                'anime' => $this->database->getAnime($noteId),
+                'id' => $noteId
             ];
+          
         break;
         default:
             $page = 'main';
@@ -121,7 +134,9 @@ class Controller{
             $viewParams = [
                 'animes' =>  $this->database->getAnimes(),
                 'before' => $data['before'] ?? null,
-                'directory' => $upload_target_dir
+                'directory' => $upload_target_dir,
+                'error' => $data['error'] ?? null,
+                'id' => $data['id'] ?? null
             ];
         break;
         }
