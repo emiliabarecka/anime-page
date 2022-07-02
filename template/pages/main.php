@@ -17,6 +17,9 @@
           case 'animeNotFound':
             echo 'Nie znaleziono anime o indeksie '.$params['id'];
           break;
+          case 'notFoundId':
+            echo 'nie znaleziono';
+          break;  
         }
       }   
       ?>
@@ -29,9 +32,9 @@
             <img src="<?php echo $params['directory'] . '\\' . $anime['image_name'] ?>" alt="img" class="img-fluid">
           </div>
           <div class="col-9 px-5">
-            <p hidden><?php echo (int)$anime['id']?></p>
-            <h3><?php echo htmlentities($anime['title']) ?></h3>
-            <p><?php echo htmlentities($anime['description_0']) ?></p>
+            <p hidden><?php echo $anime['id']?></p>
+            <h3><?php echo ($anime['title']) ?></h3>
+            <p><?php echo ($anime['description_0']) ?></p>
             <a href="/animePage/?action=show&id=<?php echo $anime['id']; ?>" role="button" class="btn btn-secondary">Więcej</a>    
         </div> 
       </div> 

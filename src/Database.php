@@ -50,9 +50,10 @@ class Database{
         }
         $charactersString =  $anime['characters'];
         $characterArray =  explode(",", $charactersString);
-        $anime['characters'] = $characterArray;
-        
+        $anime['characters'] = $characterArray;   
         $anime['episodes'] = explode("," , $anime['episodes'] ?? []);
+        $anime['id'] = (string)$anime['id'];
+        $anime['image_name']  = (string)$anime['image_name'];   
         return $anime;
     }
 
@@ -60,7 +61,17 @@ class Database{
         try{
             $query = "SELECT id, title, description_0, image_name FROM animes";
             $result = $this->conn->query($query);
-            $animes = $result->fetchAll( PDO::FETCH_ASSOC);    
+            $animes = $result->fetchAll( PDO::FETCH_ASSOC);
+            foreach($animes as $key => $anime){
+                // $animes[$anime]['id'] = (string)$anime['id'];
+                $animes[$key]['id'] = (string)$animes[$key]['id'];
+                $animes[$key]['image_name'] = (string)$animes[$key]['image_name'];
+               
+             }  
+            // foreach ($animes as $anime){
+            //     var_dump($anime);
+            //     echo '<br><hr><br>';  
+            // }  
             return $animes;
         }
         catch (Throwable $e){

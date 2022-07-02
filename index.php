@@ -4,25 +4,28 @@ namespace Ap;
 
 use Ap\Exception\AppException;
 use App\Exception\ConfigurationException;
+use Ap\Request;
 use Throwable;
 
-require_once('src/Controller.php');
+require_once('src/AnimeController.php');
 require_once('src/Utils/debug.php');
 $config = require_once('config/config.php');
+require_once('src/Request.php');
 require_once('src/Exception/AppException.php');
 //wyłączenie zglaszania błędow
 // error_reporting(0);
 // ini_set('display_errors', '0');
 
+session_start();
 
 //przekazujemy tablice post i get do konstruktora
-$request = [
-    'get' => $_GET,
-    'post' => $_POST    
-];
+
+$request = new Request($_GET, $_POST);
+
+
 try{
-    Controller::initConfiguration($config);
-    (new Controller($request))->run();
+    AbstractController::initConfiguration($config);
+    (new AnimeController($request))->run();
 }
 catch (ConfigurationException $e){
     echo '<h3>Błąd konfiguracji</h3>';
