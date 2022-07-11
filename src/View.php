@@ -12,12 +12,9 @@ class View{
 
         foreach( self::PARAMS_TO_ESCAPE as $escapedParam){
             if(!empty($params[$escapedParam])){
-                // $this->escape($params[$escapedParam]);
                 $params[$escapedParam] = $this->escape($params[$escapedParam]);
             }    
-        }
-        var_dump($params);
-        // $this->escape($params);    
+        }    
         require_once('template/layout.php');    
     }
 
@@ -28,9 +25,9 @@ class View{
             if(is_array($param)){
                 $clearParams[$key] = $this->escape($param);
             }
-            else{
+            else {
                 $clearParams[$key] =  htmlentities($param);
-            }  
+            } 
         }
         return $clearParams;
     }

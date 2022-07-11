@@ -5,6 +5,12 @@
           case 'created':
             echo 'Dodano anime do bazy';
           break;
+          case 'edited':
+            echo 'Zmodyfikowano anime';
+          break;
+          case 'deleted':
+            echo  'Usunięto anime';
+          break;  
         }
       }
       ?>
@@ -17,8 +23,8 @@
           case 'animeNotFound':
             echo 'Nie znaleziono anime o indeksie '.$params['id'];
           break;
-          case 'notFoundId':
-            echo 'nie znaleziono';
+          case 'missingId':
+            echo 'Nieprawidłowy parametr';
           break;  
         }
       }   

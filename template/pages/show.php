@@ -6,6 +6,7 @@ $anime = $params['anime'] ?? null;
     <div class="col">
         <a href="/animePage/"><button class="btn btn-secondary">Powót do strony głównej</button></a>
         <a href="/animePage/?action=edit&id=<?php echo $anime['id']?>"><button class="btn btn-secondary m-5">Edytuj</button></a>
+        <a href="/animePage/?action=delete&id=<?php echo $anime['id']?>"><button class="btn btn-secondary">Usuń</button></a>
     </div>
 </div>
 <div class="row">

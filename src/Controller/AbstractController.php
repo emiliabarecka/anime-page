@@ -1,19 +1,18 @@
 <?php
 declare(strict_types=1);
-namespace Ap;
-use App\Exception\ConfigurationException;
+namespace Ap\Controller;
+use Ap\Exception\ConfigurationException;
 use Ap\Request;
-require_once('src/Exception/ConfigurationException.php');
-require_once('src/View.php');
-require_once('src/Database.php');
-require_once('src/Request.php');
-
+use Ap\Exception\NotFoundException;
+use Ap\Exception\StorageException;
+use Ap\Model\AnimeModel;
+use Ap\View;
 class AbstractController{
     private static array $configuration = [];
     protected const DEFAULT_ACTION = 'main';
     protected Request $request;
     protected View $view;
-    protected Database $database;
+    protected AnimeModel $animeModel;
 
        //zamiast tworzyc polaczenie z bazą w kocntruktorze robimy metode statytczną
        public static function initConfiguration(array $configuration): void{
@@ -25,19 +24,29 @@ class AbstractController{
         if(empty(self::$configuration['db'])){
             throw new ConfigurationException('Configuration error');
         }
-        $this->database = new Database(self::$configuration['db']);
+        $this->animeModel = new AnimeModel(self::$configuration['db']);
         $this->request = $request;
         $this->view = new View();   
     }
-    public function run(): void{ 
-        //sprawdzamy co przyszlo z geta i sami okreslamy strone dla widoku
-        $action = $this->action() . 'Action';
-        
-    
-        if(!method_exists($this, $action)){
-            $action = self::DEFAULT_ACTION . 'Action';    
+    final public function run(): void{ 
+        try{
+            $action = $this->action() . 'Action';
+            if(!method_exists($this, $action)){
+                $action = self::DEFAULT_ACTION . 'Action';    
+            }
+            $this->$action();
         }
-        $this->$action();
+        catch(StorageException $e){
+            $page = 'error';
+            $this->view->render($page, [
+                'message' => $e->getMessage()
+            ]);
+        }
+        catch(NotFoundException $e){
+            $animeId = (int)$this->request->getParam('id');
+            $this->redirect('/animePage', ['error' => 'animeNotFound&id='. $animeId]);
+        }
+        
         
         //albo switch
         // switch($this->action()){
@@ -61,5 +70,19 @@ class AbstractController{
         //przenieslismy rozpoznawanie akcji do wlasnej metody
     private function action():string{
         return $this->request->getParam('action', self::DEFAULT_ACTION);
+    }
+    final protected function redirect(string $to, array $params): void{
+        $location = $to;
+        
+        if(count($params)){
+            $queryParams = [];
+            foreach($params as $key => $value){
+                $queryParams[] = urlencode($key) .'='. urldecode($value);
+            }
+            $queryParams = implode('&', $queryParams);
+            $location = $to . '/?'. $queryParams;
+        } 
+        header("Location:$location");
+        exit();
     } 
 }

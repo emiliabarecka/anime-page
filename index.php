@@ -1,27 +1,27 @@
 <?php
 declare(strict_types=1);
-namespace Ap;
 
-use Ap\Exception\AppException;
-use App\Exception\ConfigurationException;
+spl_autoload_register(function(string $classNameSpace){
+$path = str_replace(['\\', 'Ap/'], ['/', ''], $classNameSpace);
+$path = "src/$path.php";
+require_once($path);
+
+});
 use Ap\Request;
-use Throwable;
-
-require_once('src/AnimeController.php');
+use Ap\Controller\AbstractController;
+use Ap\Controller\AnimeController;
+use Ap\Exception\AppException;
+use Ap\Exception\ConfigurationException;
 require_once('src/Utils/debug.php');
 $config = require_once('config/config.php');
-require_once('src/Request.php');
-require_once('src/Exception/AppException.php');
+
+$request = new Request($_GET, $_POST, $_SERVER);
+
 //wyłączenie zglaszania błędow
 // error_reporting(0);
 // ini_set('display_errors', '0');
 
 session_start();
-
-//przekazujemy tablice post i get do konstruktora
-
-$request = new Request($_GET, $_POST);
-
 
 try{
     AbstractController::initConfiguration($config);
@@ -35,8 +35,8 @@ catch (AppException $e){
     echo '<h3>Bład w aplikacji </h3>';
     echo '<h5>'.$e->getMessage().'</h5>';    
 }
-catch (Throwable $e){
+catch (\Throwable $e){
     echo '<h3>Bład w aplikacji </h3>';
-    dump($e);
+    echo '<h3>' . $e->getMessage() . '</h3>';
 }
 ?>
