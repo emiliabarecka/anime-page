@@ -3,7 +3,7 @@
 <form method="post" action="/animePage/?action=create" enctype="multipart/form-data">
   <div class="mb-3">
     <label for="title" class="form-label h3 mt-3 mb-3">Title<span class="required" style="color:white"> * </span></label>
-    <input type="text" class="form-control" id="title" name="title" require>
+    <input type="text" class="form-control" id="title" name="title" required>
   </div>
   <div class="mb-3">
     <label class="form-label h3">Description 1</label>

@@ -56,9 +56,8 @@ class AnimeController extends AbstractController{
                     'eps' => $this->request->postParam('eps'),
                     'img' => $img    
                 ];
-                
                 if($this->request->hasPost() && $this->request->postParam('title')){
-                    $this->animeModel->createAnime($animeData);
+                    $this->animeModel->create($animeData);
                     $this->redirect('/animePage', ['before' => 'created']);
                 } 
         }
@@ -85,17 +84,22 @@ class AnimeController extends AbstractController{
         $page = 'edit'; 
         if($this->request->isPost()){
             $animeId = (int)$this->request->postParam('id');
-            $img = $_FILES['img'] ?? null; 
+            $img = $_FILES['img']['name'];
+            $pre = $_POST['pre-image'];
+             
             $animeData = [
                 'title' => $this->request->postParam('title'),
                 'desc' => $this->request->postParam('desc'),
                 'desc1' =>$this->request->postParam('desc1'),
                 'characters' => $this->request->postParam('characters'),
                 'eps' => $this->request->postParam('eps'),
-                'img' => $img
+                'img' => $img ?: $pre
             ];
-            $this->animeModel->editAnime($animeId, $animeData);
-            $this->redirect('/animePage', ['before' => 'edited']);
+            
+            $animeData = $this->view->escape($animeData);
+            
+            $this->animeModel->edit($animeId, $animeData);
+            $this->redirect('/animePage/?action=show&id='.$animeId, ['before'=>'edited']);
         }
         
         $viewParams = [
@@ -107,7 +111,7 @@ class AnimeController extends AbstractController{
         $page = 'delete';
         if($this->request->isPost()){
             $id = (int)$this->request->postParam('id');
-            $this->animeModel->deleteAnime($id);
+            $this->animeModel->delete($id);
             $this->redirect('/animePage', ['before' => 'deleted']);
         }
         $viewParams = [
@@ -120,8 +124,7 @@ class AnimeController extends AbstractController{
         if(!$animeId){
             $this->redirect('/animePage', ['error' => 'missingId']);
         }
-        return $this->animeModel->getAnime($animeId); 
-        
+        return $this->animeModel->get($animeId);     
     }
     
 }

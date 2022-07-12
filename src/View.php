@@ -18,15 +18,16 @@ class View{
         require_once('template/layout.php');    
     }
 
-    private function escape(array $params){
+    public function escape(array $params){
         $clearParams = [];
         foreach($params as $key =>$param){
             
-            if(is_array($param)){
+            if (is_array($param)){
                 $clearParams[$key] = $this->escape($param);
             }
             else {
-                $clearParams[$key] =  htmlentities($param);
+                $clearParams[$key] = htmlentities($param);
+                $clearParams[$key] = preg_replace('/\s+/', ' ', $clearParams[$key]);    
             } 
         }
         return $clearParams;

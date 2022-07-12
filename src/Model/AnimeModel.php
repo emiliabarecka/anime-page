@@ -3,13 +3,14 @@ declare (strict_types=1);
 namespace Ap\Model;
 
 use Ap\Model\AbstractModel;
+use Ap\Model\ModelInterface;
 use Ap\Exception\NotFoundException;
 use Ap\Exception\StorageException;
 use Ap\Exception\ConfigurationException;
 use PDO;
 use Throwable;
 
-class AnimeModel extends AbstractModel{
+class AnimeModel extends AbstractModel implements ModelInterface{
 
     public function getPassword(): array{
         try{
@@ -23,7 +24,7 @@ class AnimeModel extends AbstractModel{
     }
     
 
-    public function getAnime(int $id): array{
+    public function get(int $id): array{
         try{
             $query = "SELECT id, title, description_0, description_1, characters, episodes, image_name FROM animes WHERE id = $id";
             $result = $this->conn->query($query);
@@ -37,7 +38,9 @@ class AnimeModel extends AbstractModel{
         }
         $charactersString =  $anime['characters'];
         $characterArray =  explode(",", $charactersString);
-        $anime['characters'] = $characterArray;   
+        $anime['characters'] = $characterArray;
+        $anime['charactersString'] = $charactersString;
+        $anime['episodesString'] = $anime['episodes'];
         $anime['episodes'] = explode("," , $anime['episodes'] ?? []);
         $anime['id'] = (string)$anime['id'];
         $anime['image_name']  = (string)$anime['image_name'];   
@@ -61,7 +64,7 @@ class AnimeModel extends AbstractModel{
             throw new StorageException('Nie udało się pobrac danych', 400, $e);
         }    
     } 
-    public function createAnime(array $data): void{     
+    public function create(array $data): void{     
         
         try{
             $title = $this->conn->quote($data['title']);
@@ -90,14 +93,14 @@ class AnimeModel extends AbstractModel{
         }
     }
 
-    public function editAnime(int $id, array $data): void{
+    public function edit(int $id, array $data): void{
         try{
             $title = $this->conn->quote($data['title']);
             $desc = $this->conn->quote($data['desc']);
             $desc1 = $this->conn->quote($data['desc1']);
             $characters = $this->conn->quote($data['characters']);
             $eps = $this->conn->quote($data['eps']);
-            $img = $data['img']['name'];
+            $img = $data['img'];
             $home_dir = dirname(__FILE__);
             
             $upload_target_dir = "$home_dir\..\uploaded";
@@ -123,7 +126,7 @@ class AnimeModel extends AbstractModel{
             
         }
     }
-    public function deleteAnime(int $id):void{
+    public function delete(int $id): void{
         try{
             $query = "DELETE FROM animes WHERE id = $id LIMIT 1";
             $this->conn->exec($query);

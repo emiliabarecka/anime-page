@@ -24,23 +24,20 @@ $anime = $params['anime'];
   <div class="mb-3">
     <label class="form-label h3">Characters</label>
     <textarea class="form-control" name="characters">
-      <?php foreach($anime['characters'] as $character){
-        echo $character.' ';
-      }?>
+   <?php echo $anime['charactersString'];?> 
     </textarea>
   </div>
   <div class="mb-3">
     <label class="form-label h3">Episodes</label>
     <textarea class="form-control" name="eps">
-    <?php foreach($anime['episodes'] as $episode){
-        echo $episode.' ';
-      }?>
+  <?php echo $anime['episodesString'];?>
      </textarea>
   </div>
   <div class="mb-3">
-  <input class="form-control" type="file" name="img"/>
+    <input type="hidden" name="pre-image" value="<?php echo $anime['image_name']?>">
+  <input type="file" name="img" class="image-input"/>
   </div>
-  <button type="submit" class="btn btn-secondary mb-5 ">Edytuj</button>
+  <button type="submit" class="btn btn-secondary mb-5 ">Zapisz zmiany</button>
 </form>
 <?php else: ?>
   <div class="row">
