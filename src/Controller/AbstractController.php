@@ -7,6 +7,7 @@ use Ap\Exception\NotFoundException;
 use Ap\Exception\StorageException;
 use Ap\Model\AnimeModel;
 use Ap\View;
+
 class AbstractController{
     private static array $configuration = [];
     protected const DEFAULT_ACTION = 'main';
@@ -31,6 +32,7 @@ class AbstractController{
     final public function run(): void{ 
         try{
             $action = $this->action() . 'Action';
+            
             if(!method_exists($this, $action)){
                 $action = self::DEFAULT_ACTION . 'Action';    
             }
@@ -67,10 +69,12 @@ class AbstractController{
         //     break;
         //     }
         }
+        
         //przenieslismy rozpoznawanie akcji do wlasnej metody
     private function action():string{
         return $this->request->getParam('action', self::DEFAULT_ACTION);
     }
+    
     final protected function redirect(string $to, array $params): void{
         $location = $to;
         
@@ -80,7 +84,7 @@ class AbstractController{
                 $queryParams[] = urlencode($key) .'='. urldecode($value);
             }
             $queryParams = implode('&', $queryParams);
-            $location = $to . '/?'. $queryParams;
+            $location = $to . '&'. $queryParams;
         } 
         header("Location:$location");
         exit();

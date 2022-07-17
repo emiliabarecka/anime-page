@@ -1,12 +1,30 @@
 <?php
 $anime = $params['anime'] ?? null;
 ?>
+<div class=" row message my-2" style="color:green">
+    <div class="col">
+    <?php
+        if(!empty($_GET['before'])){
+            switch($_GET['before']){
+            case 'created':
+                echo 'Dodano anime do bazy';
+            break;
+            case 'edited':
+                echo 'Zmodyfikowano anime';
+            break;
+            case 'deleted':
+                echo  'Usunięto anime';
+            break;  
+            }
+        }
+        ?>
+    </div>     
+</div>
 <?php if($anime): ?>
 <div class="row">
     <div class="col">
-        <a href="/animePage/"><button class="btn btn-secondary">Powót do strony głównej</button></a>
-        <a href="/animePage/?action=edit&id=<?php echo $anime['id']?>"><button class="btn btn-secondary m-5">Edytuj</button></a>
-        <a href="/animePage/?action=delete&id=<?php echo $anime['id']?>"><button class="btn btn-secondary">Usuń</button></a>
+        <a href="<?php echo ($_SESSION['user_type'] === 'owner') ? '/animePage/?action=admin' : '/animePage'
+        ?> "><button class="btn btn-secondary m-5"><?=($_SESSION['user_type'] === 'owner') ? 'Powót' : 'Powrót do strony głównej'?></button></a>
     </div>
 </div>
 <div class="row">
@@ -20,16 +38,7 @@ $anime = $params['anime'] ?? null;
         <p><?php echo ($anime['description_0']);?></p>
     </div>
 </div>    
-<div class="row mt-3">
-    <div class="col">
-        <p>
-        <?php echo ($anime['description_1']);?>
-        <img src="img/Ciel.jpg" alt="img" class="img-fluid float-start m-3 " style="max-width:200px">
-        </p>
-    </div>          
-</div>
-<div class="row mt-3">
-    
+<div class="row mt-3">  
     <div class="col-6">
         <h3 class="text-start">Postacie:</h3>
         <ul>

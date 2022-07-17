@@ -1,4 +1,5 @@
 <?php
+const DEV = 1;
 return  ['db' =>
 [
         'host' => 'localhost',

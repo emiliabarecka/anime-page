@@ -10,6 +10,7 @@ require_once($path);
 use Ap\Request;
 use Ap\Controller\AbstractController;
 use Ap\Controller\AnimeController;
+use Ap\Controller\UserController;
 use Ap\Exception\AppException;
 use Ap\Exception\ConfigurationException;
 require_once('src/Utils/debug.php');

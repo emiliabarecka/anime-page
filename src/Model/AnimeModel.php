@@ -26,7 +26,7 @@ class AnimeModel extends AbstractModel implements ModelInterface{
 
     public function get(int $id): array{
         try{
-            $query = "SELECT id, title, description_0, description_1, characters, episodes, image_name FROM animes WHERE id = $id";
+            $query = "SELECT id, title, description_0, characters, episodes, image_name FROM animes WHERE id = $id";
             $result = $this->conn->query($query);
             $anime = $result->fetch(PDO::FETCH_ASSOC);    
         }
@@ -49,14 +49,14 @@ class AnimeModel extends AbstractModel implements ModelInterface{
 
     public function getAnimes(): array{
         try{
-            $query = "SELECT id, title, description_0, image_name FROM animes";
+            $query = "SELECT id, title, LEFT(description_0, 800) AS description_0, image_name FROM animes ";
             $result = $this->conn->query($query);
             $animes = $result->fetchAll( PDO::FETCH_ASSOC);
             foreach($animes as $key => $anime){
                 // $animes[$anime]['id'] = (string)$anime['id'];
                 $animes[$key]['id'] = (string)$animes[$key]['id'];
                 $animes[$key]['image_name'] = (string)$animes[$key]['image_name'];
-               
+                // $animes[$key]['LEFT(description_0, 120)'] = $animes[$key]['description_0'];  
              }   
             return $animes;
         }
@@ -84,9 +84,10 @@ class AnimeModel extends AbstractModel implements ModelInterface{
          
             move_uploaded_file($file_tmp, "$upload_target_dir/$name");
             
-            $query = "INSERT INTO animes(title, description_0, description_1, characters, episodes, image_name)
+            $query = "INSERT INTO animes (title, description_0, description_1, characters, episodes, image_name)
                       VALUES($title, $desc, $desc2, $characters, $eps, '$img')";
             $this->conn->exec($query);
+            
         }
         catch (Throwable $e){
             throw new StorageException('Nie udało się dodać nowej anime do bazy');
@@ -97,7 +98,6 @@ class AnimeModel extends AbstractModel implements ModelInterface{
         try{
             $title = $this->conn->quote($data['title']);
             $desc = $this->conn->quote($data['desc']);
-            $desc1 = $this->conn->quote($data['desc1']);
             $characters = $this->conn->quote($data['characters']);
             $eps = $this->conn->quote($data['eps']);
             $img = $data['img'];
@@ -113,7 +113,6 @@ class AnimeModel extends AbstractModel implements ModelInterface{
             UPDATE animes SET
             title = $title,
             description_0 = $desc,
-            description_1 = $desc1,
             characters = $characters,
             episodes = $eps,
             image_name = '$img'

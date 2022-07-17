@@ -1,9 +1,18 @@
 <?php
 declare(strict_types=1);
 namespace Ap\Controller;
+use Ap\Controller\UserController;
 
 class AnimeController extends AbstractController{
 
+    public function registerAction():void{
+        $userController = new UserController($this->request);
+        $userController->register();
+    }
+    public function logOutAction():void{
+        $userController = new UserController($this->request);
+        $userController->logOut();
+    }
     public function logInAction(){    
         $password = $this->animeModel->getPassword();
         $password2 = $this->request->postParam('password');    
@@ -19,14 +28,12 @@ class AnimeController extends AbstractController{
     }
     public function mainAction(): void{
         $page = 'main';
-        $before= $this->request->getParam('before');
         $error = $this->request->getParam('error');
         $id = $this->request->getParam('id');
         //dobra sciezka bez upublicznienia struktory plikow
         $upload_target_dir = basename(getcwd()."\uploaded");
         $viewParams = [
             'animes' =>  $this->animeModel->getAnimes(),
-            'before' => $before ?? null,
             'directory' => $upload_target_dir,
             'error' => $error ?? null,
             'id' => $id ?? null
@@ -51,14 +58,13 @@ class AnimeController extends AbstractController{
                 $animeData = [
                     'title' => $this->request->postParam('title'),
                     'desc' => $this->request->postParam('desc'),
-                    'desc2' =>$this->request->postParam('desc2'),
                     'characters' => $this->request->postParam('characters'),
                     'eps' => $this->request->postParam('eps'),
                     'img' => $img    
                 ];
                 if($this->request->hasPost() && $this->request->postParam('title')){
                     $this->animeModel->create($animeData);
-                    $this->redirect('/animePage', ['before' => 'created']);
+                    $this->redirect('/animePage/?action=admin', ['before' => 'created']);
                 } 
         }
         $this->view->render($page, $viewParams ?? []);
@@ -70,7 +76,7 @@ class AnimeController extends AbstractController{
             // uruchom funkcję sprawdzającą hasło
             $this->logInAction();
             if(isset($_SESSION) && $_SESSION['user_type'] === 'owner'){
-                $page = 'create';
+                $this->redirect('/animePage/?action=admin', []);
             } else {
                 $_SESSION['user_type'] = 'other';
             } 
@@ -79,31 +85,41 @@ class AnimeController extends AbstractController{
         }
         $this->view->render($page, $viewParams ?? []); 
     }
-  
+    public function adminAction(){
+        $page='admin';
+        $before= $this->request->getParam('before');
+                $error = $this->request->getParam('error');
+                $id = $this->request->getParam('id');
+                $upload_target_dir = basename(getcwd()."\uploaded");
+                $viewParams = [
+                    'animes' =>  $this->animeModel->getAnimes(),
+                    'before' => $before ?? null,
+                    'directory' => $upload_target_dir,
+                    'error' => $error ?? null,
+                    'id' => $id ?? null
+                ];
+                $this->view->render($page, $viewParams ?? []);
+    }
     public function editAction(): void{
         $page = 'edit'; 
         if($this->request->isPost()){
             $animeId = (int)$this->request->postParam('id');
             $img = $_FILES['img']['name'];
-            $pre = $_POST['pre-image'];
-             
+            $pre = $_POST['pre-image']; 
             $animeData = [
                 'title' => $this->request->postParam('title'),
                 'desc' => $this->request->postParam('desc'),
-                'desc1' =>$this->request->postParam('desc1'),
                 'characters' => $this->request->postParam('characters'),
                 'eps' => $this->request->postParam('eps'),
                 'img' => $img ?: $pre
-            ];
-            
-            $animeData = $this->view->escape($animeData);
-            
+            ];   
+            $animeData = $this->view->escape($animeData);  
             $this->animeModel->edit($animeId, $animeData);
             $this->redirect('/animePage/?action=show&id='.$animeId, ['before'=>'edited']);
-        }
-        
+        } 
         $viewParams = [
-            'anime' => $this->getAnime()
+            'anime' => $this->getAnime(),
+            'before' => $this->request->getParam('before')
         ];
         $this->view->render($page, $viewParams ?? []);
     }
@@ -112,7 +128,7 @@ class AnimeController extends AbstractController{
         if($this->request->isPost()){
             $id = (int)$this->request->postParam('id');
             $this->animeModel->delete($id);
-            $this->redirect('/animePage', ['before' => 'deleted']);
+            $this->redirect('/animePage/?action=admin', ['before' => 'deleted']);
         }
         $viewParams = [
             'anime' => $this->getAnime()

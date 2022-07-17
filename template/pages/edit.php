@@ -11,15 +11,11 @@ $anime = $params['anime'];
   <input type="hidden" name='id' value=<?php echo $anime['id'];?>>
   <div class="mb-3">
     <label for="title" class="form-label h3 mt-3 mb-3">Title</label>
-    <input type="text" name="title" value="<?php echo $anime['title']?>">
+    <input type="text" name="title" value="<?php echo $anime['title']?>" required>
   </div>
   <div class="mb-3">
     <label class="form-label h3">Description 1</label>
     <textarea class="form-control" name="desc"><?php echo $anime['description_0']?></textarea>
-  </div>
-  <div class="mb-3">
-    <label for="desc" class="form-label h3">Description 2</label>
-    <textarea class="form-control" name="desc1"><?php echo $anime['description_1']?></textarea>
   </div>
   <div class="mb-3">
     <label class="form-label h3">Characters</label>

@@ -8,25 +8,30 @@ class View{
         'anime'
     ];
 
-    public function render(string $page, array $params = []): void{
+    public string $page;
 
-        foreach( self::PARAMS_TO_ESCAPE as $escapedParam){
+    public function render(string $page, array $params = []): void{
+        $this->page = $page;
+        foreach(self::PARAMS_TO_ESCAPE as $escapedParam){
             if(!empty($params[$escapedParam])){
                 $params[$escapedParam] = $this->escape($params[$escapedParam]);
             }    
         }    
-        require_once('template/layout.php');    
+        require_once('template/layout.php');   
     }
 
     public function escape(array $params){
         $clearParams = [];
-        foreach($params as $key =>$param){
+        foreach($params as $key => $param){
             
             if (is_array($param)){
                 $clearParams[$key] = $this->escape($param);
             }
+            // elseif($key == 'description_0'){
+            //     $clearParams[$key] = $param; 
+            // }
             else {
-                $clearParams[$key] = htmlentities($param);
+                $clearParams[$key] = htmlspecialchars($param, ENT_QUOTES, 'UTF-8');
                 $clearParams[$key] = preg_replace('/\s+/', ' ', $clearParams[$key]);    
             } 
         }

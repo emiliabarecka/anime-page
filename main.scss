@@ -2,7 +2,7 @@ body{
     background-image: url(img/alBackGround.jpg);
     // background-repeat: no-repeat;
     background-size: cover;
-    
+    font-family: 'Nunito Sans';
     color: rgb(183, 188, 191);
     text-align: center;
 }
@@ -28,4 +28,22 @@ a>span:hover{
 }
 p{
     text-align: justify;
+}
+
+/* --------- EDITOR STYLES  ---------------------------------------------------------------------------------------- */
+
+.editor-wrapper {
+    height: 500px;
+}
+
+.ck.ck-reset.ck-editor[role='application'],
+.ck.ck-editor__main {
+    height: 100%;
+
+    .ck-content.ck-editor__editable {
+        color: black;
+        height: 80%;
+        overflow-y: auto;
+    }
+
 }

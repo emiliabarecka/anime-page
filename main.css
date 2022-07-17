@@ -1,6 +1,7 @@
 body {
   background-image: url(img/alBackGround.jpg);
   background-size: cover;
+  font-family: 'Nunito Sans';
   color: #b7bcbf;
   text-align: center;
 }
@@ -36,4 +37,20 @@ p {
   text-align: justify;
 }
 
+/* --------- EDITOR STYLES  ---------------------------------------------------------------------------------------- */
+.editor-wrapper {
+  height: 500px;
+}
+
+.ck.ck-reset.ck-editor[role='application'],
+.ck.ck-editor__main {
+  height: 100%;
+}
+
+.ck.ck-reset.ck-editor[role='application'] .ck-content.ck-editor__editable,
+.ck.ck-editor__main .ck-content.ck-editor__editable {
+  color: black;
+  height: 80%;
+  overflow-y: auto;
+}
 /*# sourceMappingURL=main.css.map */
