@@ -32,7 +32,7 @@
                         <a href="#" class="nav-link dropdown-toggle h5 ms-5" data-toggle="dropdown" role="button">Postacie</a>
                     </li>                    
                     <li class="nav-item ms-auto">
-                        <a href="/animePage/?action=log" class="nav-link h5"  role="button">Zaloguj</a>
+                        <a href="/animePage/?action=logIn" class="nav-link h5"  role="button">Zaloguj</a>
                     </li>
                     <li class="nav-item mx-5">
                         <a href="/animePage/?action=register&lang=pol" class="nav-link h5"  role="button">Zarejestruj się</a>
@@ -42,16 +42,16 @@
             </div>
         </nav>
     </header>
-    <div class="container-fluid pt-5">
+    <div class="container-fluid ">
     <div class="row">
-        <div class="d-none d-lg-block col-lg-2" > <img src="img/Wei.jpg" alt="zdjecie" class="img-fluid d-inline"></div>
+        <div class="d-none d-lg-block col-lg-2" > <img src="img/Wei.jpg" alt="zdjecie" class="img-fluid mt-5"></div>
         <div class="col-sm-12 col-lg-8 pb-5">
         <?php 
         //page jest widoczna bo layout includujemy w View
         include("template/pages/$page.php");
         ?>
         </div>
-        <div class="d-none d-lg-block col-lg-2" ><img src="img/Wangji.jpg" alt="zdjecie" class="img-fluid d-inline"></div>
+        <div class="d-none d-lg-block col-lg-2" ><img src="img/Wangji.jpg" alt="zdjecie" class="img-fluid my-5"></div>
     </div>
     <div class="row">
         <div class="col text-center pt-5">STOPKA</div>

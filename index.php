@@ -9,8 +9,7 @@ require_once($path);
 });
 use Ap\Request;
 use Ap\Controller\AbstractController;
-use Ap\Controller\AnimeController;
-use Ap\Controller\UserController;
+use Ap\Controller\PageController;
 use Ap\Exception\AppException;
 use Ap\Exception\ConfigurationException;
 require_once('src/Utils/debug.php');
@@ -26,7 +25,7 @@ session_start();
 
 try{
     AbstractController::initConfiguration($config);
-    (new AnimeController($request))->run();
+    (new PageController($request))->run();
 }
 catch (ConfigurationException $e){
     echo '<h3>Błąd konfiguracji</h3>';

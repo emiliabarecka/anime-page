@@ -27,12 +27,12 @@ class View{
             if (is_array($param)){
                 $clearParams[$key] = $this->escape($param);
             }
-            // elseif($key == 'description_0'){
-            //     $clearParams[$key] = $param; 
-            // }
+            elseif(!$key == 'description_0'){
+                $clearParams[$key] = htmlentities($param); 
+            }
             else {
-                $clearParams[$key] = htmlspecialchars($param, ENT_QUOTES, 'UTF-8');
-                $clearParams[$key] = preg_replace('/\s+/', ' ', $clearParams[$key]);    
+                // $clearParams[$key] = htmlspecialchars($param, ENT_QUOTES, 'UTF-8');
+                $clearParams[$key] = preg_replace('/\s+/', ' ', $param);    
             } 
         }
         return $clearParams;

@@ -23,7 +23,6 @@ class AnimeModel extends AbstractModel implements ModelInterface{
         }
     }
     
-
     public function get(int $id): array{
         try{
             $query = "SELECT id, title, description_0, characters, episodes, image_name FROM animes WHERE id = $id";
@@ -53,39 +52,26 @@ class AnimeModel extends AbstractModel implements ModelInterface{
             $result = $this->conn->query($query);
             $animes = $result->fetchAll( PDO::FETCH_ASSOC);
             foreach($animes as $key => $anime){
-                // $animes[$anime]['id'] = (string)$anime['id'];
                 $animes[$key]['id'] = (string)$animes[$key]['id'];
-                $animes[$key]['image_name'] = (string)$animes[$key]['image_name'];
-                // $animes[$key]['LEFT(description_0, 120)'] = $animes[$key]['description_0'];  
+                $animes[$key]['image_name'] = (string)$animes[$key]['image_name'];  
              }   
             return $animes;
         }
         catch (Throwable $e){
             throw new StorageException('Nie udało się pobrac danych', 400, $e);
         }    
-    } 
+    }
+    
     public function create(array $data): void{     
         
         try{
             $title = $this->conn->quote($data['title']);
             $desc = $this->conn->quote($data['desc']);
-            $desc2 = $this->conn->quote($data['desc2']);
             $characters = $this->conn->quote($data['characters']);
             $eps = $this->conn->quote($data['eps']);
-            $img = $data['img']['name'];
-
-            // $upload_dir = 'C:\xampp\htdocs\animePage\uploaded';
-            $home_dir = dirname(__FILE__);
             
-            $upload_target_dir = "$home_dir\..\uploaded";
-            $file_tmp = $_FILES['img']['tmp_name'];
-            //ustawia kreski w dobrym kierunku w zależności od systemu
-            $name = basename($_FILES['img']['name']);
-         
-            move_uploaded_file($file_tmp, "$upload_target_dir/$name");
-            
-            $query = "INSERT INTO animes (title, description_0, description_1, characters, episodes, image_name)
-                      VALUES($title, $desc, $desc2, $characters, $eps, '$img')";
+            $query = "INSERT INTO animes (title, description_0, characters, episodes)
+                      VALUES($title, $desc, $characters, $eps)";
             $this->conn->exec($query);
             
         }
@@ -100,29 +86,19 @@ class AnimeModel extends AbstractModel implements ModelInterface{
             $desc = $this->conn->quote($data['desc']);
             $characters = $this->conn->quote($data['characters']);
             $eps = $this->conn->quote($data['eps']);
-            $img = $data['img'];
-            $home_dir = dirname(__FILE__);
-            
-            $upload_target_dir = "$home_dir\..\uploaded";
-            $file_tmp = $_FILES['img']['tmp_name'];
-            $name = basename($_FILES['img']['name']);
-         
-            move_uploaded_file($file_tmp, "$upload_target_dir/$name");
 
             $query = "
             UPDATE animes SET
             title = $title,
             description_0 = $desc,
             characters = $characters,
-            episodes = $eps,
-            image_name = '$img'
+            episodes = $eps
             WHERE id = $id
             ";
             $this->conn->exec($query);
         }
         catch(Throwable $e){
-            throw new StorageException('Nie udało sie zaktualizować anime', 400, $e);
-            
+            throw new StorageException('Nie udało sie zaktualizować anime', 400, $e);   
         }
     }
     public function delete(int $id): void{
