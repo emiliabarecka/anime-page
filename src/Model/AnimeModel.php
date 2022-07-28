@@ -110,6 +110,22 @@ class AnimeModel extends AbstractModel implements ModelInterface{
             throw new StorageException('Nie udało sie usunąć danych z bazy');
         }
     }
-
+    public function putImagesToDescription(string $desc, array $images): array{
+        $upload_target_dir = basename(getcwd()."\uploaded");
+        if (str_contains($desc, '#image')) {
+            $descriptionPart = explode('#image', $desc);
+            for($i = 0; $i < count($descriptionPart)-1; $i++) {
+                $descriptionPart[$i] .= '
+                <img src='. $upload_target_dir. '\\' 
+                . $images[$i]['name'].' '
+                .'class="img-fluid float-start m-3 show">
+                ';
+            }
+        }
+        else{
+            $descriptionPart = [$desc];
+        }
+        return $descriptionPart;
+    }
     
 }

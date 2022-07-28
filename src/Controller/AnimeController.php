@@ -26,25 +26,12 @@ class AnimeController extends AbstractController{
         $page = 'show';
         $animeId = (int)$this->request->getParam('id');
         $images = $this->imageModel->getImage($animeId);
-        $upload_target_dir = basename(getcwd()."\uploaded");
         $anime = $this->getAnime();
-        $text = [];
+        $descriptionPart = $this->animeModel->putImagesToDescription($anime['description_0'], $images);
         
-        if(str_contains($anime['description_0'], '#image')){
-            $descriptionPart = explode('#image', $anime['description_0']);
-            foreach($descriptionPart as $key => $part){
-                $part .= 
-                    '<div class="col-4">' .
-                    '<img src='. $upload_target_dir. '\\' . $images[rand(0 , count($images)-1)]['name'].' '.'class=img-fluid>'.
-                    '</div>';
-                $descriptionPart[$key] = $part;
-            }
-            $descWithImages = implode($descriptionPart);
-        }
         $viewParams = [
             'anime' => $anime,
-            'animeText' => $descWithImages,
-            'img' => $images ?? null
+            'animeText' => $descriptionPart ?? null
         ];
         $this->view->render($page, $viewParams ?? []);
     }

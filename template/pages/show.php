@@ -1,7 +1,6 @@
 <?php
 $anime = $params['anime'] ?? null;
 $user = $_SESSION['user_type'] ?? null;
-$text = $params['animeText'];
 ?>
 <div class=" row message my-2" style="color:green">
     <div class="col">
@@ -26,16 +25,19 @@ $text = $params['animeText'];
 <div class="row">
     <div class="col">
         <a href="<?php echo ($user === 'owner') ? '/animePage/?action=admin' : '/animePage';
-        ?> "><button class="btn btn-secondary m-5"><?=($user === 'owner') ? 'Powót' : 'Powrót do strony głównej';?></button></a>
-        <h1 class="my-5"><?php echo $anime['title']?></h1>
+        ?> "><button class="btn btn-secondary m-3"><?=($user === 'owner') ? 'Powót' : 'Powrót do strony głównej';?></button></a>
+        <h1 class="my-2"><?php echo $anime['title']?></h1>
     </div>
 </div>
 <div class="row">
-    <div class="col">
-        <h4><?php 
-        echo (is_array($text)) ? $text[count($text)-1] : $text;
-        ?></h4>
-    </div>
+        <?php if(is_array($params['animeText'])):?>
+            <?php foreach($params['animeText'] as $text):?>
+                <div>
+                    <p class="px-3"><?php echo $text; ?></p>
+                </div>
+            <?php endforeach; ?>
+            <?php else: echo ($params['animeText']) ?>
+        <?php endif;  ?>
 </div>
     <div class="row mt-3">  
         <div class="col-6">

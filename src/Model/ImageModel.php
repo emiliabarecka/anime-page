@@ -33,11 +33,11 @@ class ImageModel extends AbstractModel{
     }
         public function getImage(int $animeId): array{
             try{
-
                 $query = "SELECT * FROM images WHERE anime_id = $animeId";
                 $result = $this->conn->query($query);
                 $images = $result->fetchAll(PDO::FETCH_ASSOC);
-                
+                shuffle($images);
+
                 return $images;
             }catch(Throwable $e){
                 throw new StorageException('Nie udało się pobrać obrazka');

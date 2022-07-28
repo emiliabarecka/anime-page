@@ -25,6 +25,10 @@ img {
           box-shadow: 5px 5px 30px rgba(234, 230, 230, 0.72);
 }
 
+.show {
+  max-width: 200px;
+}
+
 a > span {
   color: #b7bcbf;
 }

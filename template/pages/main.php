@@ -23,7 +23,7 @@
       <?php $random = rand(0, (count($images[$anime['id']]))-1)?>
       <div class="row mt-5">
         <div class="col-4">
-          <img src="<?php echo $params['directory'] . '\\' .$images[$anime['id']][$random]; ?>" alt="img" class="img-fluid">
+          <img src="<?php echo $params['directory'] . '\\' .$images[$anime['id']][$random]; ?>" alt="img" class="img-fluid float-start">
         </div>
         <div class="col-8">
             <p hidden><?php echo $anime['id']?></p>
