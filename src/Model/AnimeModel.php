@@ -48,12 +48,15 @@ class AnimeModel extends AbstractModel implements ModelInterface{
 
     public function getAnimes(): array{
         try{
-            $query = "SELECT id, title, LEFT(description_0, 800) AS description_0, image_name FROM animes ";
+            $query = "SELECT id, title, LEFT(description_0, 800) AS description_0 FROM animes ";
             $result = $this->conn->query($query);
             $animes = $result->fetchAll( PDO::FETCH_ASSOC);
+            
             foreach($animes as $key => $anime){
                 $animes[$key]['id'] = (string)$animes[$key]['id'];
-                $animes[$key]['image_name'] = (string)$animes[$key]['image_name'];  
+                if(str_contains($anime['description_0'], '#image')){
+                    $animes[$key]['description_0'] = str_replace('#image','', $anime['description_0']) ;
+                }
              }   
             return $animes;
         }
@@ -62,7 +65,7 @@ class AnimeModel extends AbstractModel implements ModelInterface{
         }    
     }
     
-    public function create(array $data): void{     
+    public function create(array $data): int{     
         
         try{
             $title = $this->conn->quote($data['title']);
@@ -73,6 +76,7 @@ class AnimeModel extends AbstractModel implements ModelInterface{
             $query = "INSERT INTO animes (title, description_0, characters, episodes)
                       VALUES($title, $desc, $characters, $eps)";
             $this->conn->exec($query);
+            return (int)$this->conn->lastInsertId();
             
         }
         catch (Throwable $e){

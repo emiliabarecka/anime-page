@@ -6,7 +6,7 @@ $anime = $params['anime'] ?? null;
 <div class="row">
     <div class="col">
         <a href="/animePage/"><button class="btn btn-secondary">Powót do strony głównej</button></a>
-    <form method="POST" action="/animePage/?action=delete">
+    <form method="POST" action="/animePage/">
         <input type="hidden" name='id' value="<?php echo $anime['id']?>">
         <button class= "btn btn-danger m-5" type="submit" >Usuń</button>
     </form>
@@ -23,12 +23,4 @@ $anime = $params['anime'] ?? null;
         <p><?php echo ($anime['description_0']);?></p>
     </div>
 </div>    
-<div class="row mt-3">
-    <div class="col">
-        <p>
-        <?php echo ($anime['description_1']);?>
-        <img src="img/Ciel.jpg" alt="img" class="img-fluid float-start m-3 " style="max-width:200px">
-        </p>
-    </div>          
-</div>
 <?php endif; ?>

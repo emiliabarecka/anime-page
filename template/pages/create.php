@@ -1,7 +1,12 @@
 <?php
 $anime = $params['anime'] ?? null;
-$images = $params['img'];
+$images = $params['img'] ?? null;
 ?>
+<div class="row">
+  <div class="col">
+    <a href="/animePage/"><button class="btn btn-secondary m-3">Powrót</button></a>
+  </div>
+</div>
 <form method="post" action="/animePage/?action=<?php echo ($anime) ? 'edit' : 'create'?>" enctype="multipart/form-data">
 <input type="hidden" name='id' value=<?php echo ($anime) ? $anime['id']: null; ?>>  
 <div class="mb-3">
@@ -20,20 +25,18 @@ $images = $params['img'];
     <label class="form-label h3">Episodes</label>
     <textarea class="form-control" name="eps"><?php echo ($anime) ? $anime['episodesString'] : null?></textarea>
   </div>
-  <div class="mb-3">
-    <input type="hidden" name="pre-image" value="<?php echo $anime['image_name']?>">
-  </div>
   <button type="submit" class="btn btn-secondary mb-5 "><?php echo ($anime) ? 'Zapisz zmiany' : 'Dodaj'; ?></button>
 </form>
 <form action="/animePage/?action=insertImage&id=<?php echo $anime['id'] ?>" method="POST" enctype="multipart/form-data">
-<label class="form-label h5 me-2 bold">Dodaj obraz</label>
-<input type="file" name="img" class="image-input"/>
-<input type="hidden" value="<?php echo($anime) ? $anime['id'] : null;?>">
-<label class="form-label h5">Tytuł obrazu</label>
-<input type="text" name="title" class="image-input" id="title"/>
+  <label class="form-label h5 me-2 bold">Dodaj obraz</label>
+    <input type="file" name="img" class="image-input"/>
+    <input type="hidden" value="<?php echo($anime) ? $anime['id'] : null;?>">
+  <label class="form-label h5">Tytuł obrazu</label>
+    <input type="text" name="title" class="image-input" id="title"/>
 <button type="submit" class="btn btn-secondary">Dodaj</button>
 </form>
 <div class="row my-5">
+  <?php if(!empty($images)):?>
   <?php foreach($images as $img):?>
       <div class="col-6 border py-3 d-flex flex-column align-items-center justify-content-between">
       <form action="/animePage/?action=editImage&id=<?php echo $anime['id']?>" method="post" enctype="multipart/form-data">
@@ -58,6 +61,7 @@ $images = $params['img'];
         </fieldset>
       </div>
         <?php endforeach;?>
+  <?php endif ?>      
       </div>
 <script src="src/Utils/CKE/build/ckeditor.js"></script>
 <script>ClassicEditor

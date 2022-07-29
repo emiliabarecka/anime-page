@@ -2,6 +2,8 @@
 declare(strict_types=1);
 namespace Ap\Controller;
 
+use Ap\Model\ImageModel;
+
 class AnimeController extends AbstractController{
 
     public function main(): void{
@@ -14,7 +16,8 @@ class AnimeController extends AbstractController{
         $upload_target_dir = basename(getcwd()."\uploaded");
         $viewParams = [
             'animes' =>  $this->animeModel->getAnimes(),
-            'images' => $images,
+            'images' => $images ?? null,
+            'before' => $before ?? null,
             'directory' => $upload_target_dir,
             'error' => $error ?? null,
             'id' => $id ?? null
@@ -46,29 +49,13 @@ class AnimeController extends AbstractController{
                 'eps' => $this->request->postParam('eps'),   
                 ];
             if($this->request->hasPost() && $this->request->postParam('title')){
-                    $this->animeModel->create($animeData);
-                    $this->redirect('/animePage/?action=admin', ['before' => 'created']);
-            }
-            
+                    $id = $this->animeModel->create($animeData);
+                    $this->redirect('/animePage/?action=show&id='.$id, ['before' => 'created']);
+            }   
         }
         $this->view->render($page, $viewParams ?? []);
     }
     
-    public function admin(){
-        $page='admin';
-        $before = $this->request->getParam('before');
-        $error = $this->request->getParam('error');
-        $id = $this->request->getParam('id');
-        $upload_target_dir = basename(getcwd()."\uploaded");
-        $viewParams = [
-            'animes' =>  $this->animeModel->getAnimes(),
-            'before' => $before ?? null,
-            'directory' => $upload_target_dir,
-            'error' => $error ?? null,
-            'id' => $id ?? null
-            ];
-        $this->view->render($page, $viewParams ?? []);
-    }
     public function edit(): void{
         $page = 'create'; 
         if($this->request->isPost()){
@@ -100,10 +87,11 @@ class AnimeController extends AbstractController{
         if($this->request->isPost()){
             $id = (int)$this->request->postParam('id');
             $this->animeModel->delete($id);
-            $this->redirect('/animePage/?action=admin', ['before' => 'deleted']);
+            $this->redirect('/animePage/?action=show&id='.$id, ['before' => 'deleted']);
         }
         $viewParams = [
-            'anime' => $this->getAnime()
+            'before' => 'deleted',
+            'anime'=> $this->getAnime()
         ];
         $this->view->render($page, $viewParams);
     }

@@ -36,7 +36,7 @@ $user = $_SESSION['user_type'] ?? null;
                     <p class="px-3"><?php echo $text; ?></p>
                 </div>
             <?php endforeach; ?>
-            <?php else: echo ($params['animeText']) ?>
+            <?php else: echo ('Brak opisu') ?>
         <?php endif;  ?>
 </div>
     <div class="row mt-3">  

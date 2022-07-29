@@ -29,7 +29,7 @@ class PageController extends AbstractController{
     }
     public function adminAction():void{
         $animeController = new AnimeController($this->request);
-        $animeController->admin(); 
+        $animeController->main(); 
     }
 
     public function registerAction():void{
