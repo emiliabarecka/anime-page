@@ -6,8 +6,9 @@ $anime = $params['anime'] ?? null;
 <div class="row">
     <div class="col">
         <a href="/animePage/"><button class="btn btn-secondary">Powót do strony głównej</button></a>
-    <form method="POST" action="/animePage/">
+    <form method="POST" action="/animePage/?action=delete&id=<?php echo $anime['id'] ?>">
         <input type="hidden" name='id' value="<?php echo $anime['id']?>">
+        <textarea><?php echo $anime['description_0']?>"</textarea>
         <button class= "btn btn-danger m-5" type="submit" >Usuń</button>
     </form>
     </div>

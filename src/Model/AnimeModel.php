@@ -25,7 +25,7 @@ class AnimeModel extends AbstractModel implements ModelInterface{
     
     public function get(int $id): array{
         try{
-            $query = "SELECT id, title, description_0, characters, episodes, image_name FROM animes WHERE id = $id";
+            $query = "SELECT id, title, description_0, characters, episodes FROM animes WHERE id = $id";
             $result = $this->conn->query($query);
             $anime = $result->fetch(PDO::FETCH_ASSOC);    
         }
@@ -42,27 +42,34 @@ class AnimeModel extends AbstractModel implements ModelInterface{
         $anime['episodesString'] = $anime['episodes'];
         $anime['episodes'] = explode("," , $anime['episodes'] ?? []);
         $anime['id'] = (string)$anime['id'];
-        $anime['image_name']  = (string)$anime['image_name'];   
+        
         return $anime;
     }
 
-    public function getAnimes(): array{
+    public function getAnimes(null| string $user):array{
         try{
-            $query = "SELECT id, title, LEFT(description_0, 800) AS description_0 FROM animes ";
+            if($user){
+                $query = "SELECT id, title, description_0, published FROM animes";
+            }else{
+                $query = "SELECT id, title, published, LEFT(description_0, 800) AS description_0 FROM animes WHERE published != 0";
+            }
+            
             $result = $this->conn->query($query);
-            $animes = $result->fetchAll( PDO::FETCH_ASSOC);
+            $animes = $result->fetchAll(PDO::FETCH_ASSOC);
             
             foreach($animes as $key => $anime){
                 $animes[$key]['id'] = (string)$animes[$key]['id'];
                 if(str_contains($anime['description_0'], '#image')){
-                    $animes[$key]['description_0'] = str_replace('#image','', $anime['description_0']) ;
+                    $animes[$key]['description_0'] = str_replace('#image','', $anime['description_0']);
+                    $animes[$key]['published'] = (string)$animes[$key]['published'];
                 }
-             }   
+             } 
+
             return $animes;
         }
-        catch (Throwable $e){
-            throw new StorageException('Nie udało się pobrac danych', 400, $e);
-        }    
+        catch(Throwable $e){
+            throw new StorageException('Nie udało sie pobrać danych', 400, $e);
+        }
     }
     
     public function create(array $data): int{     
@@ -90,13 +97,15 @@ class AnimeModel extends AbstractModel implements ModelInterface{
             $desc = $this->conn->quote($data['desc']);
             $characters = $this->conn->quote($data['characters']);
             $eps = $this->conn->quote($data['eps']);
+            $published = $this->conn->quote($data['published']);
 
             $query = "
             UPDATE animes SET
             title = $title,
             description_0 = $desc,
             characters = $characters,
-            episodes = $eps
+            episodes = $eps,
+            published = $published
             WHERE id = $id
             ";
             $this->conn->exec($query);

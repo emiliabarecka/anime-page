@@ -25,7 +25,12 @@ $images = $params['img'] ?? null;
     <label class="form-label h3">Episodes</label>
     <textarea class="form-control" name="eps"><?php echo ($anime) ? $anime['episodesString'] : null?></textarea>
   </div>
-  <button type="submit" class="btn btn-secondary mb-5 "><?php echo ($anime) ? 'Zapisz zmiany' : 'Dodaj'; ?></button>
+  <nav class="d-flex justify-content-around my-4 border">
+    <button type="submit" class="btn btn-secondary m-2"><?php echo ($anime) ? 'Zapisz zmiany' : 'Dodaj'; ?></button>
+    <label for="published" class="h5" style="color:greenyellow"> Opublikuj
+  	  <input class="m-3" type="checkbox" id="published" name="published" value="<?php echo time(); ?>">
+    </label>
+  </nav> 
 </form>
 <form action="/animePage/?action=insertImage&id=<?php echo $anime['id'] ?>" method="POST" enctype="multipart/form-data">
   <label class="form-label h5 me-2 bold">Dodaj obraz</label>

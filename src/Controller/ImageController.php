@@ -6,7 +6,15 @@ class ImageController extends AbstractController{
 
     public function showImages():array{
         $images = [];
-        $animes = $this->animeModel->getAnimes();
+        if(isset($_SESSION['user_type']) && $_SESSION['user_type'] === 'owner'){
+            $user = 'owner';
+
+        }
+        else{
+            $user = null;
+        }
+        $animes = $this->animeModel->getAnimes($user);
+    
         foreach($animes as $anime){
             $id = (int)$anime['id'];
             $image =  $this->imageModel->getImage($id);
