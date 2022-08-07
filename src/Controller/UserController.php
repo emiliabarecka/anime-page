@@ -31,10 +31,10 @@ class UserController extends AbstractController{
         if ($this->request->postParam('password')) {    
             // uruchom funkcję sprawdzającą hasło
             $this->logInAction();
-            if(isset($_SESSION) && $_SESSION['user_type'] === 'owner'){
+            if(isset($_SESSION) && $_SESSION['userType'] === 'owner'){
                 $this->redirect('/?action=admin', []);
             } else {
-                $_SESSION['user_type'] = null;
+                $_SESSION['userType'] = null;
             } 
         } else {
             echo '<h2>Nie wpisano hasła</h2>';
@@ -49,7 +49,7 @@ class UserController extends AbstractController{
         $this->view->render($page, $viewParams ?? []);
     }
     public function logOut():void{
-        $_SESSION['user_type'] = null;
+        $_SESSION['userType'] = null;
         $this->redirect('/', []);
     }
 }

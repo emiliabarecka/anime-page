@@ -15,7 +15,7 @@ class AnimeController extends AbstractController{
         //dobra sciezka bez upublicznienia struktory plikow
         $upload_target_dir = basename("\uploaded");
         // $upload_target_dir = basename(getcwd()."\uploaded");
-        if(isset($_SESSION['user_type']) && $_SESSION['user_type'] === 'owner'){
+        if(isset($_SESSION['userType']) && $_SESSION['userType'] === 'owner'){
             $user = 'owner';
         }else{
             $user = null;
@@ -48,7 +48,7 @@ class AnimeController extends AbstractController{
     }
 
     public function create(): void{
-        if(isset($_SESSION) && $_SESSION['user_type'] === 'owner'){
+        if(isset($_SESSION) && $_SESSION['userType'] === 'owner'){
             $page = 'create';        
             $animeData = [
                 'title' => $this->request->postParam('title'),

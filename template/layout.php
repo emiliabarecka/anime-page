@@ -39,7 +39,7 @@ $animes = $params['animes'] ?? null;
                             <p style="color: rgb(183, 188, 191)">Pracujemy nad tym :)</p>
                         </div>
                     </li>                    
-                    <?php if(isset($_SESSION['userType']) && $_SESSION['userType']): ?>
+                    <?php if(isset($_SESSION['userType']) && $_SESSION['userType'] === "owner"): ?>
                         <li class="nav-item ms-auto pt-2">
                             <h5 class="m-0">Witaj <?php echo $_SESSION['userName'] ?></h5>
                         </li>

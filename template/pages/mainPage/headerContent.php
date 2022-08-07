@@ -1,6 +1,6 @@
 <div class="row">
   <div class="col my-3">
-    <?php if (!empty($_SESSION['user_type']) && $_SESSION['user_type'] === 'owner') : ?>
+    <?php if (!empty($_SESSION['userType']) && $_SESSION['userType'] === 'owner') : ?>
       <a href="/?action=create"><button class="btn btn-secondary">Dodaj nową anime</button></a>
     <?php endif; ?>
   </div>
