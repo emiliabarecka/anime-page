@@ -61,14 +61,14 @@ $animes = $params['animes'] ?? null;
     </header>
     <!-- <div class="container"> -->
     <div class="row">
-        <div class="d-none d-lg-block col-lg-2" > <img src="websites/anime-page/anime-page/img/Wei.jpg" alt="zdjecie" class="img-fluid mt-5"></div>    
+        <div class="d-none d-lg-block col-lg-2" > <img src="/img/wei.jpg" alt="zdjecie" class="img-fluid mt-5"></div>    
         <div class="col-sm-12 col-lg-8">
         <?php 
         //page jest widoczna bo layout includujemy w View
         include("template/pages/$page.php");
         ?>
         </div>
-        <div class="d-none d-lg-block col-lg-2" ><img src="img/Wangji.jpg" alt="zdjecie" class="img-fluid mt-5"></div>   
+        <div class="d-none d-lg-block col-lg-2" ><img src="img/wangji.jpg" alt="zdjecie" class="img-fluid mt-5"></div>   
     </div>
     <div class="row">
         <div class="col text-center pt-5">STOPKA</div>

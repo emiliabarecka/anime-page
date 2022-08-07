@@ -57,7 +57,7 @@ class AnimeController extends AbstractController{
                 ];
             if($this->request->hasPost() && $this->request->postParam('title')){
                     $id = $this->animeModel->create($animeData);
-                    $this->redirect('/animePage/?action=show&id='.$id, ['before' => 'created']);
+                    $this->redirect('/?action=show&id='.$id, ['before' => 'created']);
             }   
         }
         $this->view->render($page, $viewParams ?? []);
@@ -84,7 +84,7 @@ class AnimeController extends AbstractController{
             ];   
             $animeData = $this->view->escape($animeData);  
             $this->animeModel->edit($animeId, $animeData);
-            $this->redirect('/animePage/?action=show&id='.$animeId, ['before'=>'edited']);
+            $this->redirect('/?action=show&id='.$animeId, ['before'=>'edited']);
         } 
         $id = (int)$this->request->getParam('id');
         $img = $this->imageModel->getImage($id);
@@ -102,7 +102,7 @@ class AnimeController extends AbstractController{
         if($this->request->isPost()){
             $id = (int)$this->request->postParam('id');
             $this->animeModel->delete($id);
-            $this->redirect('/animePage/?action=main', ['before' => 'deleted']);
+            $this->redirect('/?action=main', ['before' => 'deleted']);
         }
         $viewParams = [
             'before' => 'deleted',
@@ -115,7 +115,7 @@ class AnimeController extends AbstractController{
         if(!$animeId){
             // header('Location:/animePage/');
             // exit();
-            $this->redirect('/animePage/?action=main', ['error' => 'animeNotFound']);
+            $this->redirect('/?action=main', ['error' => 'animeNotFound']);
         }
         return $this->animeModel->get($animeId);     
     }
