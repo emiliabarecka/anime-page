@@ -5,10 +5,10 @@ dump($anime['published']);
 ?>
 <div class="row">
   <div class="col">
-    <a href="/animePage/"><button class="btn btn-secondary m-3">Powrót</button></a>
+    <a href="/"><button class="btn btn-secondary m-3">Powrót</button></a>
   </div>
 </div>
-<form method="post" action="/animePage/?action=<?php echo ($anime) ? 'edit' : 'create'?>" enctype="multipart/form-data">
+<form method="post" action="/?action=<?php echo ($anime) ? 'edit' : 'create'?>" enctype="multipart/form-data">
 <input type="hidden" name='id' value=<?php echo ($anime) ? $anime['id']: null; ?>>  
 <div class="mb-3">
     <label for="title" class="form-label h3 mt-3 mb-3">Tytuł<span class="required" style="color:white"> * </span></label>
@@ -34,7 +34,7 @@ dump($anime['published']);
     </label>
   </nav> 
 </form>
-<form action="/animePage/?action=insertImage&id=<?php echo $anime['id'] ?>" method="POST" enctype="multipart/form-data">
+<form action="/?action=insertImage&id=<?php echo $anime['id'] ?>" method="POST" enctype="multipart/form-data">
   <label class="form-label h5 me-2 bold">Dodaj obraz</label>
     <input type="file" name="img" class="image-input"/>
     <input type="hidden" value="<?php echo($anime) ? $anime['id'] : null;?>">
@@ -46,7 +46,7 @@ dump($anime['published']);
   <?php if(!empty($images)):?>
   <?php foreach($images as $img):?>
       <div class="col-6 border py-3 d-flex flex-column align-items-center justify-content-between">
-      <form action="/animePage/?action=editImage&id=<?php echo $anime['id']?>" method="post" enctype="multipart/form-data">
+      <form action="/?action=editImage&id=<?php echo $anime['id']?>" method="post" enctype="multipart/form-data">
         <img src="<?php echo $params['directory'] . '\\' . $img['name'] ?>" alt="alt" class="img-thumbnail" style="width:150px">
         <fieldset>
           <div class="my-3">
@@ -59,7 +59,7 @@ dump($anime['published']);
           <div>
             <button type="submit" class="btn btn-secondary mx-3">Zmień</button>
             </form>
-            <form action="/animePage/?action=deleteImage&id=<?php echo $anime['id']?>" method="POST" class="my-3">
+            <form action="/?action=deleteImage&id=<?php echo $anime['id']?>" method="POST" class="my-3">
               <input type="hidden" name="animeId"value="<?php echo($anime) ? $anime['id'] : null;?>">
               <input type="hidden" name="imageId"value="<?php echo($img) ? $img['id'] : null;?>">
               <button type="submit" class="btn btn-danger mx-3">Usuń</button>

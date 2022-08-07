@@ -15,10 +15,10 @@ foreach ($params['animes'] ?? [] as $anime) : ?>
       <div class="col col-sm-12 col-md-6 px-3">
         <p hidden><?php echo $anime['id'] ?></p>
         <p><?php echo ($anime['description_0']) ?></p>
-        <a href="/animePage/?action=show&id=<?php echo $anime['id']; ?>" role="button" class="btn btn-secondary">Więcej</a>
+        <a href="/?action=show&id=<?php echo $anime['id']; ?>" role="button" class="btn btn-secondary">Więcej</a>
     <?php if (!empty($_SESSION['user_type']) && $_SESSION['user_type'] === 'owner') : ?>
-          <a href="/animePage/?action=edit&id=<?php echo $anime['id'] ?>"><button class="btn btn-secondary">Edytuj</button></a>
-          <a href="/animePage/?action=delete&id=<?php echo $anime['id'] ?>"><button class="btn btn-danger">Usuń</button></a>
+          <a href="/?action=edit&id=<?php echo $anime['id'] ?>"><button class="btn btn-secondary">Edytuj</button></a>
+          <a href="/?action=delete&id=<?php echo $anime['id'] ?>"><button class="btn btn-danger">Usuń</button></a>
     <?php endif; ?>
       </div>
   </div>

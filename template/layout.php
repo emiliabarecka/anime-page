@@ -17,7 +17,7 @@ $animes = $params['animes'] ?? null;
 <div class="container">
     <header>
         <nav class="navbar navbar-dark navbar-expand-lg ">
-            <a href="/animePage" class="navbar-brand "><img src= "img/logo_transparent.png" width="40" alt="logo" class="d-inline-block ms-5 me-3"><span class="ps-3 fw-bold">Best-anime.pl</span></a>
+            <a href="/" class="navbar-brand "><img src= "img/logo_transparent.png" width="40" alt="logo" class="d-inline-block ms-5 me-3"><span class="ps-3 fw-bold">Best-anime.pl</span></a>
             <button class="navbar-toggler me-2" type="button" data-toggle = "collapse" data-target = "#mainMenu">
                 <span class="navbar-toggler-icon"></span>
             </button>
@@ -25,11 +25,11 @@ $animes = $params['animes'] ?? null;
                 <ul class="navbar-nav ms-5 w-100">
                     <li class="nav-item">
                     <?php if($animes):?>
-                        <a href="/animePage" class="nav-link dropdown-toggle h5 ms-5" data-toggle="dropdown" role="button" >Anime</a>
+                        <a href="/" class="nav-link dropdown-toggle h5 ms-5" data-toggle="dropdown" role="button" >Anime</a>
                     <?php endif ?>
                         <div class="dropdown-menu animeMenu p-2">
                             <?php foreach($animes as $anime):?>
-                                <a href="/animePage/?action=show&id=<?php echo $anime['id']?>" class="menu-link text-decoration-none py-4"><?php echo $anime['title']?></a> 
+                                <a href="/?action=show&id=<?php echo $anime['id']?>" class="menu-link text-decoration-none py-4"><?php echo $anime['title']?></a> 
                             <?php endforeach ?>    
                         </div>
                     </li>
@@ -44,14 +44,14 @@ $animes = $params['animes'] ?? null;
                             <h5 class="m-0">Witaj <?php echo $_SESSION['userName'] ?></h5>
                         </li>
                         <li class="nav-item ms-auto">
-                            <a href="/animePage/?action=logOut" class="nav-link h5 me-5"  role="button">Wyloguj się</a>
+                            <a href="/?action=logOut" class="nav-link h5 me-5"  role="button">Wyloguj się</a>
                         </li>
                     <?php else: ?>
                         <li class="nav-item">
-                        <a href="/animePage/?action=logIn" class="nav-link h5"  role="button">Zaloguj się</a>    
+                        <a href="/?action=logIn" class="nav-link h5"  role="button">Zaloguj się</a>    
                     </li>
                     <li class="nav-item mx-5">
-                        <a href="/animePage/?action=register&lang=pol" class="nav-link h5"  role="button">Zarejestruj się</a>
+                        <a href="/?action=register&lang=pol" class="nav-link h5"  role="button">Zarejestruj się</a>
                     </li>
                     <?php endif ?>
                     
