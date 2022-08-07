@@ -61,7 +61,7 @@ $animes = $params['animes'] ?? null;
     </header>
     <!-- <div class="container"> -->
     <div class="row">
-        <div class="d-none d-lg-block col-lg-2" > <img src="img/Wei.jpg" alt="zdjecie" class="img-fluid mt-5"></div>    
+        <div class="d-none d-lg-block col-lg-2" > <img src="/animePage/img/Wei.jpg" alt="zdjecie" class="img-fluid mt-5"></div>    
         <div class="col-sm-12 col-lg-8">
         <?php 
         //page jest widoczna bo layout includujemy w View
