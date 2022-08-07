@@ -13,7 +13,8 @@ class AnimeController extends AbstractController{
         $imageController = new ImageController($this->request);
         $images = $imageController->showImages();
         //dobra sciezka bez upublicznienia struktory plikow
-        $upload_target_dir = basename(getcwd()."\uploaded");
+        $upload_target_dir = basename("\uploaded");
+        // $upload_target_dir = basename(getcwd()."\uploaded");
         if(isset($_SESSION['user_type']) && $_SESSION['user_type'] === 'owner'){
             $user = 'owner';
         }else{
