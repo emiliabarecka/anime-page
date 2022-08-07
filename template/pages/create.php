@@ -1,6 +1,7 @@
 <?php
 $anime = $params['anime'] ?? null;
 $images = $params['img'] ?? null;
+dump($anime['published']);
 ?>
 <div class="row">
   <div class="col">
@@ -29,6 +30,7 @@ $images = $params['img'] ?? null;
     <button type="submit" class="btn btn-secondary m-2"><?php echo ($anime) ? 'Zapisz zmiany' : 'Dodaj'; ?></button>
     <label for="published" class="h5" style="color:greenyellow"> Opublikuj
   	  <input class="m-3" type="checkbox" id="published" name="published" value="<?php echo time(); ?>">
+  	  <input class="m-3" type="hidden" name="ifPublished" value="<?php echo ($anime['published'])?>">
     </label>
   </nav> 
 </form>

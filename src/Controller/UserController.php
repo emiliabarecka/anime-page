@@ -5,16 +5,23 @@ namespace Ap\Controller;
 
 class UserController extends AbstractController{
     
-    public function logInAction(){    
-        $password = $this->animeModel->getPassword();
+    public function logInAction(){
+
+        $users = $this->userModel->getUsers();
+        foreach($users as $user){
+            $userName = $user['name'];
+            $userPassword = $user['password'];
+        }    
+        
         $password2 = $this->request->postParam('password');    
         if(!empty($password2)){    
-            if(password_verify($password2, $password['password'])){
-                $_SESSION['user_type'] = 'owner';    
+            if(password_verify($password2, $userPassword)){
+                $_SESSION['userType'] = 'owner'; 
+                $_SESSION['userName'] = $userName;  
             }
             else{
                 echo '<h3 style="color:red;">Nieprawidłowe hasło</h3>';
-                $_SESSION['user_type'] = null;    
+                $_SESSION['userType'] = null;    
             }
         }    
     }

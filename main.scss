@@ -17,35 +17,43 @@ header{
     a>span:hover, .navbar-dark .navbar-nav .nav-link:hover{
         color: rgb(13, 15, 18);
     }
-    .navbar-expand-md .navbar-nav .dropdown-menu{
+    .navbar-expand-lg .navbar-nav .dropdown-menu{
         border-radius: 10px;
-        background-color: rgba(0, 0, 0, 0.566);
+        background-color: rgba(0, 0, 0, 0.721);
         
         .menu-link{
             color: rgb(183, 188, 191);
             border-bottom: 2px solid  rgba(183, 188, 191, 0.695);
+            display: block;
         &:hover{
             background-color:  rgba(233, 238, 241, 0.212);
-        }
-    } 
-}
-.menu-link{
-    display: block;
-  }
-.container-fluid{
-    background-color: rgba(0, 0, 0, 0.632);
-}
-img{
-    border-radius: 10px;
-    box-shadow: 5px 5px 30px rgba(234, 230, 230, 0.72);
-}
-.show{
-    max-width: 200px;
+            }
+        } 
+    }
 }
 
-p{
+.container{
+    background-color: rgba(0, 0, 0, 0.632);
+    box-shadow: 0px 20px 50px 70px rgb(245, 242, 242);
+    p{
+        text-align: justify; 
+    }
+
+    img{
+    border-radius: 10px;
+    box-shadow: 5px 5px 30px rgba(234, 230, 230, 0.72);
+    }
+    .show{
     text-align: justify;
+    align-items: center;
+    max-width: 98%;     
+        p{
+        text-align: justify;
+        display: inline;
+        }
+    }
 }
+
 
 /* --------- EDITOR STYLES  ---------------------------------------------------------------------------------------- */
 

@@ -42,6 +42,7 @@ class AnimeController extends AbstractController{
             'animeText' => $descriptionPart ?? null,
             'error' => $error ?? null
         ];
+        
         $this->view->render($page, $viewParams ?? []);
     }
 
@@ -67,12 +68,19 @@ class AnimeController extends AbstractController{
         if($this->request->isPost()){
             $animeId = (int)$this->request->postParam('id');
             
+            if(!empty($this->request->postParam('published'))){
+                $published = $this->request->postParam('published');
+            }
+            else{
+                $published = $this->request->postParam('ifPublished');
+            }
+
             $animeData = [
                 'title' => $this->request->postParam('title'),
                 'desc' => $this->request->postParam('desc'),
                 'characters' => $this->request->postParam('characters'),
                 'eps' => $this->request->postParam('eps'),
-                'published' => $this->request->postParam('published')   
+                'published' => $published  
             ];   
             $animeData = $this->view->escape($animeData);  
             $this->animeModel->edit($animeId, $animeData);

@@ -12,20 +12,10 @@ use Throwable;
 
 class AnimeModel extends AbstractModel implements ModelInterface{
 
-    public function getPassword(): array{
-        try{
-            $query = "SELECT  password FROM users ";
-            $password = $this->conn->query($query)->fetch(PDO::FETCH_ASSOC);
-            return $password;
-        }
-        catch (Throwable $e){
-            throw new ConfigurationException("Nieprawidłowe hasło");
-        }
-    }
     
     public function get(int $id): array{
         try{
-            $query = "SELECT id, title, description_0, characters, episodes FROM animes WHERE id = $id";
+            $query = "SELECT id, title, description_0, characters, episodes, published FROM animes WHERE id = $id";
             $result = $this->conn->query($query);
             $anime = $result->fetch(PDO::FETCH_ASSOC);    
         }
@@ -42,6 +32,7 @@ class AnimeModel extends AbstractModel implements ModelInterface{
         $anime['episodesString'] = $anime['episodes'];
         $anime['episodes'] = explode("," , $anime['episodes'] ?? []);
         $anime['id'] = (string)$anime['id'];
+        $anime['published'] = (string)$anime['published'];
         
         return $anime;
     }
@@ -49,7 +40,7 @@ class AnimeModel extends AbstractModel implements ModelInterface{
     public function getAnimes(null| string $user):array{
         try{
             if($user){
-                $query = "SELECT id, title, description_0, published FROM animes";
+                $query = "SELECT id, title, description_0, published, LEFT(description_0, 800) AS description_0 FROM animes";
             }else{
                 $query = "SELECT id, title, published, LEFT(description_0, 800) AS description_0 FROM animes WHERE published != 0";
             }
@@ -125,19 +116,25 @@ class AnimeModel extends AbstractModel implements ModelInterface{
     }
     public function putImagesToDescription(string $desc, array $images): array{
         $upload_target_dir = basename(getcwd()."\uploaded");
+
         if (str_contains($desc, '#image')) {
             $descriptionPart = explode('#image', $desc);
-            for($i = 0; $i < count($descriptionPart)-1; $i++) {
+
+            for ($i = 0; $i < count($descriptionPart) -1; $i++) {
                 $descriptionPart[$i] .= '
                 <img src='. $upload_target_dir. '\\' 
                 . $images[$i]['name'].' '
-                .'class="img-fluid float-start m-3 show">
+                .'class="img-fluid  float-start m-3">
                 ';
             }
-        }
-        else{
+
+            // skleiłem to na końcu w jednego stringa w tablicy
+            $descriptionPart = [implode('', $descriptionPart)];
+
+        } else {
             $descriptionPart = [$desc];
         }
+        
         return $descriptionPart;
     }
     

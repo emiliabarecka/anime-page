@@ -21,20 +21,20 @@ $user = $_SESSION['user_type'] ?? null;
 <?php if($anime): ?>
 <div class="row">
     <div class="col">
-        <a href="<?php echo ($user === 'owner') ? '/animePage/?action=admin' : '/animePage';
-        ?> "><button class="btn btn-secondary m-3"><?=($user === 'owner') ? 'Powót' : 'Powrót do strony głównej';?></button></a>
-        <h1 class="my-2"><?php echo $anime['title']?></h1>
+        <h1 class="my-4"><?php echo $anime['title']?></h1>
     </div>
 </div>
-<div class="row">
-        <?php if(is_array($params['animeText'])):?>
-            <?php foreach($params['animeText'] as $text):?>
-                <div>
-                    <p class="px-3"><?php echo $text; ?></p>
-                </div>
-            <?php endforeach; ?>
-            <?php else: echo ('Brak opisu') ?>
-        <?php endif;  ?>
+<div class="row mx-auto">
+    
+    <?php if(is_array($params['animeText'])):?>
+        <?php foreach($params['animeText'] as $text):?>
+            <div class="col show">       
+                    <p class="d-inline mx-auto"><?php echo $text; ?></p>
+            </div>
+        <?php endforeach; ?>
+        <?php else: echo ('Brak opisu') ?>
+    <?php endif;  ?>
+    
 </div>
 <div class="row mt-3">  
     <div class="col-6">

@@ -4,14 +4,16 @@
 // if (!owner && published) : show ? ''
 
 foreach ($params['animes'] ?? [] as $anime) : ?>
-  <div class="row mt-5">
+  <div class="row mt-5 gx-5">
+    <div class="col-12">
+    <h3><?php echo ($anime['title']) ?></h3>
+    </div>
       <?php $random = rand(0, (count($images[$anime['id']])) - 1); ?>
-      <div class="col-4">
-        <img src="<?php echo $params['directory'] . '\\' . $images[$anime['id']][$random]; ?>" alt="img" class="img-fluid float-start">
+      <div class="col col-sm-12 col-md-6">
+        <img src="<?php echo $params['directory'] . '\\' . $images[$anime['id']][$random]; ?>" alt="img" class="img-fluid float-start mt-3 w-100 mx-3">
       </div>
-      <div class="col-8">
+      <div class="col col-sm-12 col-md-6 px-3">
         <p hidden><?php echo $anime['id'] ?></p>
-        <h3><?php echo ($anime['title']) ?></h3>
         <p><?php echo ($anime['description_0']) ?></p>
         <a href="/animePage/?action=show&id=<?php echo $anime['id']; ?>" role="button" class="btn btn-secondary">Więcej</a>
     <?php if (!empty($_SESSION['user_type']) && $_SESSION['user_type'] === 'owner') : ?>

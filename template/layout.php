@@ -14,8 +14,9 @@ $animes = $params['animes'] ?? null;
     <link href="https://fonts.googleapis.com/css2?family=Courgette&family=Nunito+Sans:wght@400;700;800;900&family=Ubuntu:ital,wght@0,300;0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
 </head>
 <body>
+<div class="container">
     <header>
-        <nav class="navbar navbar-dark navbar-expand-md ">
+        <nav class="navbar navbar-dark navbar-expand-lg ">
             <a href="/animePage" class="navbar-brand "><img src= "img/logo_transparent.png" width="40" alt="logo" class="d-inline-block ms-5 me-3"><span class="ps-3 fw-bold">Best-anime.pl</span></a>
             <button class="navbar-toggler me-2" type="button" data-toggle = "collapse" data-target = "#mainMenu">
                 <span class="navbar-toggler-icon"></span>
@@ -28,29 +29,37 @@ $animes = $params['animes'] ?? null;
                     <?php endif ?>
                         <div class="dropdown-menu animeMenu p-2">
                             <?php foreach($animes as $anime):?>
-                                <a href="/animePage/?action=show&id=<?php echo $anime['id']?>" class="menu-link text-decoration-none"><?php echo $anime['title']?></a> 
+                                <a href="/animePage/?action=show&id=<?php echo $anime['id']?>" class="menu-link text-decoration-none py-4"><?php echo $anime['title']?></a> 
                             <?php endforeach ?>    
                         </div>
                     </li>
                     <li class="nav-item">
                         <a href="#" class="nav-link dropdown-toggle h5 ms-5" data-toggle="dropdown" role="button">Postacie</a>
+                        <div class="dropdown-menu animeMenu p2">
+                            <p style="color: rgb(183, 188, 191)">Pracujemy nad tym :)</p>
+                        </div>
                     </li>                    
-                    <li class="nav-item ms-auto">
-                        <?php if(isset($_SESSION['user_type']) && $_SESSION['user_type']): ?>
-                        <a href="/animePage/?action=logOut" class="nav-link h5"  role="button">Wyloguj się</a>
-                        <?php else: ?>
-                        <a href="/animePage/?action=logIn" class="nav-link h5"  role="button">Zaloguj się</a>
-                        <?php endif ?>
+                    <?php if(isset($_SESSION['userType']) && $_SESSION['userType']): ?>
+                        <li class="nav-item ms-auto pt-2">
+                            <h5 class="m-0">Witaj <?php echo $_SESSION['userName'] ?></h5>
+                        </li>
+                        <li class="nav-item ms-auto">
+                            <a href="/animePage/?action=logOut" class="nav-link h5 me-5"  role="button">Wyloguj się</a>
+                        </li>
+                    <?php else: ?>
+                        <li class="nav-item">
+                        <a href="/animePage/?action=logIn" class="nav-link h5"  role="button">Zaloguj się</a>    
                     </li>
                     <li class="nav-item mx-5">
                         <a href="/animePage/?action=register&lang=pol" class="nav-link h5"  role="button">Zarejestruj się</a>
                     </li>
+                    <?php endif ?>
                     
                 </ul>
             </div>
         </nav>
     </header>
-    <div class="container-fluid ">
+    <!-- <div class="container"> -->
     <div class="row">
         <div class="d-none d-lg-block col-lg-2" > <img src="img/Wei.jpg" alt="zdjecie" class="img-fluid mt-5"></div>    
         <div class="col-sm-12 col-lg-8">

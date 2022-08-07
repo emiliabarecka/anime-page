@@ -2,6 +2,8 @@
 declare(strict_types=1);
 namespace Ap\Model;
 use Ap\Exception\ConfigurationException;
+use Throwable;
+use PDO;
 
 class UserModel extends AbstractModel{
 // public function register(array $data):void{
@@ -14,4 +16,15 @@ class UserModel extends AbstractModel{
 //         throw new ConfigurationException('Nie udało sie dokonać rejestracji');
 //     }
 // }
+public function getUsers(): array{
+    try{
+        $query = "SELECT  password, name FROM users ";
+        $users = $this->conn->query($query)->fetchAll(PDO::FETCH_ASSOC);
+        
+        return $users;
+    }
+    catch (Throwable $e){
+        throw new ConfigurationException("Nieprawidłowe hasło");
+    }
+}
 }

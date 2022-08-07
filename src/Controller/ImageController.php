@@ -8,7 +8,6 @@ class ImageController extends AbstractController{
         $images = [];
         if(isset($_SESSION['user_type']) && $_SESSION['user_type'] === 'owner'){
             $user = 'owner';
-
         }
         else{
             $user = null;

@@ -8,6 +8,7 @@ use Ap\Exception\StorageException;
 use Ap\Model\AnimeModel;
 use Ap\View;
 use Ap\Model\ImageModel;
+use Ap\Model\UserModel;
 
 class AbstractController{
     private static array $configuration = [];
@@ -16,6 +17,7 @@ class AbstractController{
     protected View $view;
     protected AnimeModel $animeModel;
     protected ImageModel $imageModel;
+    protected UserModel $userModel;
 
        //zamiast tworzyc polaczenie z bazą w kocntruktorze robimy metode statytczną
        public static function initConfiguration(array $configuration): void{
@@ -28,6 +30,7 @@ class AbstractController{
             throw new ConfigurationException('Configuration error');
         }
         $this->animeModel = new AnimeModel(self::$configuration['db']);
+        $this->userModel = new UserModel(self::$configuration['db']);
         $this->imageModel = new ImageModel(self::$configuration['db']);
         $this->request = $request;
         $this->view = new View();   
