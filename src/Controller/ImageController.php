@@ -39,7 +39,7 @@ class ImageController extends AbstractController{
                 'img' => $img 
             ];
             $this->imageModel->insertImage($imageData);
-            $this->redirect('/animePage/?action=show&id='.$animeId, ['before'=>'edited']);
+            $this->redirect('/?action=show&id='.$animeId, ['before'=>'edited']);
         }
     }
     
@@ -49,7 +49,7 @@ class ImageController extends AbstractController{
             $id = (int)$this->request->postParam('id');
             $imgName = $_FILES['img']['name'];
             $this->imageModel->edit($id, $imgName);
-            $this->redirect('/animePage/?action=show&id='.$animeId, ['before'=>'edited']);
+            $this->redirect('/?action=show&id='.$animeId, ['before'=>'edited']);
         }
     }
     public function deleteImage():void{
@@ -57,7 +57,7 @@ class ImageController extends AbstractController{
             $animeId = (int)$this->request->postParam('animeId');
             $imageId = (int)$this->request->postParam('imageId');
             $this->imageModel->delete($animeId, $imageId);
-            $this->redirect('/animePage/?action=show&id='.$animeId, ['before'=>'edited']);
+            $this->redirect('/?action=show&id='.$animeId, ['before'=>'edited']);
         }
     }
 }

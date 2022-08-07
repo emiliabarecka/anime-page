@@ -89,7 +89,7 @@ class AnimeController extends AbstractController{
         } 
         $id = (int)$this->request->getParam('id');
         $img = $this->imageModel->getImage($id);
-        $upload_target_dir = basename(getcwd()."\uploaded"); 
+        $upload_target_dir = basename("\uploaded"); 
         $viewParams = [
             'anime' => $this->getAnime(),
             'before' => $this->request->getParam('before'),
@@ -114,8 +114,6 @@ class AnimeController extends AbstractController{
     private function getAnime(): array{
         $animeId = (int)$this->request->getParam('id');
         if(!$animeId){
-            // header('Location:/animePage/');
-            // exit();
             $this->redirect('/?action=main', ['error' => 'animeNotFound']);
         }
         return $this->animeModel->get($animeId);     
