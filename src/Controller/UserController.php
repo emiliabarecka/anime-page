@@ -32,7 +32,7 @@ class UserController extends AbstractController{
             // uruchom funkcję sprawdzającą hasło
             $this->logInAction();
             if(isset($_SESSION) && $_SESSION['user_type'] === 'owner'){
-                $this->redirect('/animePage/?action=admin', []);
+                $this->redirect('/?action=admin', []);
             } else {
                 $_SESSION['user_type'] = null;
             } 
@@ -50,6 +50,6 @@ class UserController extends AbstractController{
     }
     public function logOut():void{
         $_SESSION['user_type'] = null;
-        $this->redirect('/animePage', []);
+        $this->redirect('/', []);
     }
 }
