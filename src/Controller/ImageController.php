@@ -6,7 +6,7 @@ class ImageController extends AbstractController{
 
     public function showImages():array{
         $images = [];
-        if(isset($_SESSION['user_type']) && $_SESSION['user_type'] === 'owner'){
+        if(isset($_SESSION['userType']) && $_SESSION['userType'] === 'owner'){
             $user = 'owner';
         }
         else{

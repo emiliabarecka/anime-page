@@ -1,6 +1,6 @@
 <?php
 $anime = $params['anime'] ?? null;
-$user = $_SESSION['user_type'] ?? null;
+$user = $_SESSION['userType'] ?? null;
 ?>
 <div class=" row message my-2" style="color:green">
     <div class="col">

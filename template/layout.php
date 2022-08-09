@@ -27,7 +27,7 @@ $animes = $params['animes'] ?? null;
                     <?php if($animes):?>
                         <a href="/animePage" class="nav-link dropdown-toggle h5 ms-5" data-toggle="dropdown" role="button" >Anime</a>
                     <?php endif ?>
-                        <div class="dropdown-menu animeMenu p-2">
+                        <div class="w-75 dropdown-menu animeMenu p-2">
                             <?php foreach($animes as $anime):?>
                                 <a href="/animePage/?action=show&id=<?php echo $anime['id']?>" class="menu-link text-decoration-none py-4"><?php echo $anime['title']?></a> 
                             <?php endforeach ?>    
@@ -39,32 +39,26 @@ $animes = $params['animes'] ?? null;
                             <p style="color: rgb(183, 188, 191)">Pracujemy nad tym :)</p>
                         </div>
                     </li>                    
-                    <?php if(isset($_SESSION['userType']) && $_SESSION['userType']): ?>
-                        <li class="nav-item ms-auto pt-2">
-                            <h5 class="m-0">Witaj <?php echo $_SESSION['userName'] ?></h5>
-                        </li>
+                    <?php if(isset($_SESSION['userType']) && $_SESSION['userType'] === 'owner'): ?>
                         <li class="nav-item ms-auto">
-                            <a href="/animePage/?action=logOut" class="nav-link h5 me-5"  role="button">Wyloguj się</a>
+                            <a href="/animePage/?action=logOut"  class="nav-link h5 ms-5"  role="button">Wyloguj się<h5><?php echo $_SESSION['userName'] ?></h5></a>
                         </li>
                     <?php else: ?>
                         <li class="nav-item">
-                        <a href="/animePage/?action=logIn" class="nav-link h5"  role="button">Zaloguj się</a>    
+                        <a href="/animePage/?action=logIn"  class="nav-link  h5 ms-5"  role="button">Zaloguj się</a>    
                     </li>
-                    <li class="nav-item mx-5">
-                        <a href="/animePage/?action=register&lang=pol" class="nav-link h5"  role="button">Zarejestruj się</a>
+                    <li class="nav-item">
+                        <a href="/animePage/?action=register&lang=pol"  class="nav-link  h5 ms-5"  role="button">Zarejestruj się</a>
                     </li>
-                    <?php endif ?>
-                    
+                    <?php endif ?>  
                 </ul>
             </div>
         </nav>
     </header>
-    <!-- <div class="container"> -->
     <div class="row">
         <div class="d-none d-lg-block col-lg-2" > <img src="img/Wei.jpg" alt="zdjecie" class="img-fluid mt-5"></div>    
         <div class="col-sm-12 col-lg-8">
         <?php 
-        //page jest widoczna bo layout includujemy w View
         include("template/pages/$page.php");
         ?>
         </div>
