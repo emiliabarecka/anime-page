@@ -113,8 +113,6 @@ class AnimeController extends AbstractController{
     private function getAnime(): array{
         $animeId = (int)$this->request->getParam('id');
         if(!$animeId){
-            // header('Location:/animePage/');
-            // exit();
             $this->redirect('/animePage/?action=main', ['error' => 'animeNotFound']);
         }
         return $this->animeModel->get($animeId);     

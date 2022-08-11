@@ -1,6 +1,5 @@
 <?php
 $animes = $params['animes'] ?? null;
-
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -39,9 +38,12 @@ $animes = $params['animes'] ?? null;
                             <p style="color: rgb(183, 188, 191)">Pracujemy nad tym :)</p>
                         </div>
                     </li>                    
-                    <?php if(isset($_SESSION['userType']) && $_SESSION['userType'] === 'owner'): ?>
+                    <?php if(isset($_SESSION['userType']) && $_SESSION['userType'] != null): ?>
                         <li class="nav-item ms-auto">
                             <a href="/animePage/?action=logOut"  class="nav-link h5 ms-5"  role="button">Wyloguj się<h5><?php echo $_SESSION['userName'] ?></h5></a>
+                        </li>
+                        <li class="nav-item ms-auto">
+                            <a href="/animePage/?action=logOut"  class="nav-link h5 ms-5"  role="button">Dodaj komentarz<h5></h5></a>
                         </li>
                     <?php else: ?>
                         <li class="nav-item">

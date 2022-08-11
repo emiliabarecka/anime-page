@@ -15,7 +15,7 @@ if($language === 'pol'){
 }
 ?>
     <div class="row d-flex text-align-center">
-        <?php if(isset($_SESSION['userType']) && $_SESSION['userType'] === 'regular'):?>
+        <?php if(isset($_SESSION['userType']) && $_SESSION['userType'] === 'normal_user'):?>
           <div class="col my-5">
           <p class="h2 text-center">Pomyślna rejestracja, witaj na pokładzie !</p>
           <p class="h5 text-center">Mozesz teraz dodawać komentarze. Podziel się z nami swoimi ulubionymi anime.</p>
