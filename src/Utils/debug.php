@@ -21,3 +21,4 @@ function dump($data){
         <br/>';
     }  
 }
+?>

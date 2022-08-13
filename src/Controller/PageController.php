@@ -31,10 +31,13 @@ class PageController extends AbstractController{
         $animeController = new AnimeController($this->request);
         $animeController->main(); 
     }
-
     public function registerAction():void{
         $userController = new UserController($this->request);
         $userController->register();
+    }
+    public function addCommentAction():void{
+        $userController = new CommentController($this->request);
+        $userController->addComment();
     }
     public function logInAction():void{
         $userController = new UserController($this->request);

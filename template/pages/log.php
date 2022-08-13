@@ -1,10 +1,37 @@
-<form method="POST">
+    <div class="row d-flex justify-content-center align-items-center h-100">
+      <div class="col col-xl-10 mt-5">
+        <div class="card" style="border-radius: 1rem;">
+          <div class="row g-0">
+            <div class="col-md-6 col-lg-5 d-none d-md-block">
+              <img src="uploaded/welcome.jpg"
+                alt="login form" class="img-fluid mt-5" style="border-radius: 10px;" />
+            </div>
+            <div class="col-md-6 col-lg-7 d-flex align-items-center">
+              <div class="card-body">
+                <form method="POST">
+                  <div class="d-flex align-items-center mb-3 pb-1">
+                    <span class="h4 fw-bold mb-0"><img src= "img/logo_transparent.png" width="40" alt="logo" class="d-inline-block ms-5 me-3"/>Best-anime.pl</span>
+                  </div>
+                  <div class="form-outline mb-4">
+                    <input type="text" id="form2Example17" class="form-control form-control-lg" name="name"/>
+                    <label class="form-label" for="form2Example17">login</label>
+                  </div>
 
-<div class="form-group mt-5">
-  <label for="password1">Password</label>
-  <input type="password" class="form-control" id="password1" placeholder="Password" name="password" required>
-  <label class="mt-5">Login</label>
-  <input type="text" class="form-control" placeholder="login" name="name" required>
-</div>
-<button type="submit" class="btn btn-secondary mt-5">Submit</button>
-</form>
+                  <div class="form-outline mb-4">
+                    <input type="password" id="form2Example27" class="form-control form-control-lg" name="password" />
+                    <label class="form-label" for="form2Example27">hasło</label>
+                  </div>
+
+                  <div class="pt-1 mb-4">
+                    <button class="btn btn-success btn-lg btn-block" type="submit">zaloguj</button>
+                  </div>
+                  <p class="mb-5 pb-lg-2">Nie masz konta? <a href="/animePage/?action=register"
+                      style="color: rgb(183, 188, 191); font-weight:bold">Zarejestruj się tutaj</a></p>
+                </form>
+
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>

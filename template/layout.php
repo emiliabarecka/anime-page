@@ -20,38 +20,43 @@ $animes = $params['animes'] ?? null;
             <button class="navbar-toggler me-2" type="button" data-toggle = "collapse" data-target = "#mainMenu">
                 <span class="navbar-toggler-icon"></span>
             </button>
-            <div class="collapse navbar-collapse ms-5" id="mainMenu">
+            <div class="collapse navbar-collapse ms-auto" id="mainMenu">
                 <ul class="navbar-nav ms-5 w-100">
                     <li class="nav-item">
                     <?php if($animes):?>
-                        <a href="/animePage" class="nav-link dropdown-toggle h5 ms-5" data-toggle="dropdown" role="button" >Anime</a>
-                    <?php endif ?>
-                        <div class="w-75 dropdown-menu animeMenu p-2">
+                        <a href="/animePage" class="nav-link dropdown-toggle h5 ms-lg-5" data-toggle="dropdown" role="button" >Anime</a>
+                        <div class="w-40 dropdown-menu animeMenu p-2">
                             <?php foreach($animes as $anime):?>
-                                <a href="/animePage/?action=show&id=<?php echo $anime['id']?>" class="menu-link text-decoration-none py-4"><?php echo $anime['title']?></a> 
+                                <p><a href="/animePage/?action=show&id=<?php echo $anime['id']?>" class="menu-link text-decoration-none py-4">
+                                <?php echo $anime['title']?></a></p> 
                             <?php endforeach ?>    
                         </div>
                     </li>
                     <li class="nav-item">
-                        <a href="#" class="nav-link dropdown-toggle h5 ms-5" data-toggle="dropdown" role="button">Postacie</a>
+                        <a href="#" class="nav-link dropdown-toggle h5 ms-lg-5" data-toggle="dropdown" role="button">Postacie</a>
                         <div class="dropdown-menu animeMenu p2">
                             <p style="color: rgb(183, 188, 191)">Pracujemy nad tym :)</p>
                         </div>
-                    </li>                    
-                    <?php if(isset($_SESSION['userType']) && $_SESSION['userType'] != null): ?>
-                        <li class="nav-item ms-auto">
-                            <a href="/animePage/?action=logOut"  class="nav-link h5 ms-5"  role="button">Wyloguj się<h5><?php echo $_SESSION['userName'] ?></h5></a>
+                    </li> 
+                    <?php endif ?>                   
+                    <?php if(isset($_SESSION['userType']) && $_SESSION['userType'] != null ): ?>
+                        <li class="nav-item">
+                            <a href="/animePage/?action=logOut"  class="nav-link h5 ms-lg-5"  role="button">Wyloguj się <?php echo $_SESSION['userName'] ?? null ?></a>
                         </li>
-                        <li class="nav-item ms-auto">
-                            <a href="/animePage/?action=logOut"  class="nav-link h5 ms-5"  role="button">Dodaj komentarz<h5></h5></a>
-                        </li>
+                        <?php if($page != 'comments'): ?>
+                            <li class="nav-item">
+                                <a href="/animePage/?action=addComment"  class="nav-link h5 ms-lg-5"  role="button">Dodaj komentarz<h5></h5></a>
+                            </li>
+                        <?php endif ?>
                     <?php else: ?>
                         <li class="nav-item">
-                        <a href="/animePage/?action=logIn"  class="nav-link  h5 ms-5"  role="button">Zaloguj się</a>    
+                        <a href="/animePage/?action=logIn"  class="nav-link  h5 ms-lg-5"  role="button">Zaloguj się</a>    
                     </li>
+                    <?php if($page != 'register'):?>
                     <li class="nav-item">
-                        <a href="/animePage/?action=register&lang=pol"  class="nav-link  h5 ms-5"  role="button">Zarejestruj się</a>
+                        <a href="/animePage/?action=register"  class="nav-link  h5 ms-lg-5"  role="button">Zarejestruj się</a>
                     </li>
+                    <?php endif ?>
                     <?php endif ?>  
                 </ul>
             </div>
@@ -60,14 +65,12 @@ $animes = $params['animes'] ?? null;
     <div class="row">
         <div class="d-none d-lg-block col-lg-2" > <img src="img/Wei.jpg" alt="zdjecie" class="img-fluid mt-5"></div>    
         <div class="col-sm-12 col-lg-8">
-        <?php 
-        include("template/pages/$page.php");
-        ?>
+        <?php include("template/pages/$page.php")?>
         </div>
         <div class="d-none d-lg-block col-lg-2" ><img src="img/Wangji.jpg" alt="zdjecie" class="img-fluid mt-5"></div>   
     </div>
     <div class="row">
-        <div class="col text-center pt-5">STOPKA</div>
+        <div class="col text-center py-5">STOPKA</div>
     </div>
     </div>   
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>

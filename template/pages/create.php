@@ -1,13 +1,8 @@
 <?php
 $anime = $params['anime'] ?? null;
 $images = $params['img'] ?? null;
-dump($anime['published']);
 ?>
-<div class="row">
-  <div class="col">
-    <a href="/animePage/"><button class="btn btn-secondary m-3">Powrót</button></a>
-  </div>
-</div>
+
 <form method="post" action="/animePage/?action=<?php echo ($anime) ? 'edit' : 'create'?>" enctype="multipart/form-data">
 <input type="hidden" name='id' value=<?php echo ($anime) ? $anime['id']: null; ?>>  
 <div class="mb-3">

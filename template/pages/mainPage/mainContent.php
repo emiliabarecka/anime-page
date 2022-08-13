@@ -5,10 +5,14 @@ foreach ($params['animes'] ?? [] as $anime) : ?>
     <h3><?php echo ($anime['title']) ?></h3>
     </div>
       <?php $random = rand(0, (count($images[$anime['id']])) - 1); ?>
-      <div class="col col-sm-12 col-md-6">
-        <img src="<?php echo $params['directory'] . '\\' . $images[$anime['id']][$random]; ?>" alt="img" class="img-fluid float-start  w-100 mx-3">
+      <div class="col-12 col-md-6 px-3 ps-lg-3 pe-md-0" >
+        <img 
+          src="<?php echo $params['directory'] . '\\' . $images[$anime['id']][$random]; ?>" 
+          alt="img" 
+          class="img-fluid d-inline mt-3 mx-auto" 
+        >
       </div>
-      <div class="col col-sm-12 col-md-6 px-3">
+      <div class="col-12 col-md-6">
         <p hidden><?php echo $anime['id'] ?></p>
         <p><?php echo ($anime['description_0']) ?></p>
         <a href="/animePage/?action=show&id=<?php echo $anime['id']; ?>" role="button" class="btn btn-secondary">Więcej</a>
@@ -19,3 +23,4 @@ foreach ($params['animes'] ?? [] as $anime) : ?>
       </div>
   </div>
 <?php endforeach; ?>
+
