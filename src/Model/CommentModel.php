@@ -13,12 +13,13 @@ class CommentModel extends AbstractModel{
             $userId = $this->conn->quote($data['userId']);
             $content = $this->conn->quote($data['content']);
             $date = $this->conn->quote($data['date']);
-            $query = "INSERT INTO comments (user_name, user_id, content, date) VALUES ($userName, $userId, $content, $date)";
+            $animeId = $this->conn->quote($data['animeId']) ?? 'komentarz nieprzypisany do konkretnej anime';
+            $query = "INSERT INTO comments (user_name, user_id, anime_id, content, date) VALUES ($userName, $userId,$animeId, $content, $date)";
 
             $this->conn->exec($query);
         }
         catch(Throwable $e){
-            throw new ConfigurationException('Nie udało sie dodać komentarza');
+            throw new ConfigurationException('Nie udało sie dodać komentarza', 400, $e);
         }
     }
 }

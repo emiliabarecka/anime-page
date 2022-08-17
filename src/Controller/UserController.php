@@ -41,7 +41,11 @@ class UserController extends AbstractController{
             $this->request->postParam('name')) {    
             $this->logInAction();
             if($_SESSION['userType'] === 'normal_user'){
-                $this->redirect('/animePage', []);
+                if(isset($_POST['animeId'])){
+                    $this->redirect('/animePage/?action=show&id='.$_POST['animeId'], []);
+                }else{
+                     $this->redirect('/animePage', []);
+                }
             }
             else if($_SESSION['userType'] === 'owner'){
                 $this->redirect('/animePage/?action=admin', []);
@@ -81,8 +85,8 @@ class UserController extends AbstractController{
     }
 
     public function logOut():void{
-        $_SESSION['userType'] = null;
-        $_SESSION['userName'] = null;
+        session_unset();
+        
         $this->redirect('/animePage', []);
     }
 }

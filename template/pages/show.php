@@ -37,7 +37,7 @@ $user = $_SESSION['userType'] ?? null;
     
 </div>
 <div class="row mt-3">  
-    <div class="col-6">
+    <div class="col-md-6">
         <h3 class="text-start">Postacie:</h3>
         <ul>
         <?php
@@ -46,7 +46,7 @@ $user = $_SESSION['userType'] ?? null;
         <?php endfor;?>
         </ul>
     </div>
-    <div class="col-6">
+    <div class="col-md-6">
         <h3 class="text-start">Odcinki:</h3>
         <ul>
         <?php for($i = 0; $i < count($anime['episodes'] ?? []); $i++): ?>
@@ -55,4 +55,6 @@ $user = $_SESSION['userType'] ?? null;
         </ul>
     </div>   
 </div>
-<?php endif; ?>
+<?php endif; ?>       
+<?php include_once('comments.php');?>
+
