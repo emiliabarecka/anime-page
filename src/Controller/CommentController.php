@@ -22,7 +22,7 @@ class CommentController extends AbstractController{
             if(!empty($commentData)){
                 $commentData = $this->view->escape($commentData);
                 $this->commentModel->addComment($commentData);
-                $this->redirect('/animePage/?action=show&id='.$commentData['animeId'] , ['before' => 'commented']);
+                $this->redirect('/?action=show&id='.$commentData['animeId'] , ['before' => 'commented']);
             } 
         }     
     }

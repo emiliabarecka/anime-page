@@ -14,7 +14,6 @@ class ImageModel extends AbstractModel{
             $imgName = $_FILES['img']['name'];
             $animeId = $data['id'];
             $title = $this->conn->quote($data['title']);
-            // $upload_dir = 'C:\xampp\htdocs\animePage\uploaded';
             $home_dir = dirname(__FILE__);
             var_dump($home_dir);
             $upload_target_dir = "$home_dir\..\..\uploaded";

@@ -28,7 +28,7 @@
                   <div class="pt-1 mb-4">
                     <button class="btn btn-success btn-lg btn-block" type="submit">zaloguj</button>
                   </div>
-                  <p class="mb-5 pb-lg-2">Zaloguj się, żeby dodawać komentarze. Nie masz konta? <a href="/animePage/?action=register"
+                  <p class="mb-5 pb-lg-2">Zaloguj się, żeby dodawać komentarze. Nie masz konta? <a href="/?action=register"
                       style="color: rgb(183, 188, 191); font-weight:bold">Zarejestruj się tutaj</a></p>
                 </form>
               </div>

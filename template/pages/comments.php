@@ -1,7 +1,7 @@
 <div class="row d-flex justify-content-center">
       <div class="col-md-10 col-lg-10 col-xl-10 mt-5">
         <div class="card">
-            <form class="settings-form" method="POST" action="/animePage/?action=show&id=<?php echo $anime['id']?>">
+            <form class="settings-form" method="POST" action="/?action=show&id=<?php echo $anime['id']?>">
                 <table>
                     <thead>
                         <p class="h6 py-2 border border-dark mb-0 text-center">Komentarze</p>

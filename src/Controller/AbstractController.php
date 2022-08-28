@@ -55,7 +55,7 @@ class AbstractController{
         }
         catch(NotFoundException $e){
             $animeId = (int)$this->request->getParam('id');
-            $this->redirect('/animePage', ['error' => 'animeNotFound&id='. $animeId]);
+            $this->redirect('/', ['error' => 'animeNotFound&id='. $animeId]);
         }
         
         
