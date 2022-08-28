@@ -22,13 +22,16 @@ abstract class AbstractModel{
     //funkcja do dokonania polacznia z bazą
     private function createConnection(array $config): void{
 
-        $dsn = "mysql:dbname={$config['database']};host={$config['host']}";
+        $dsn = "mysql:dbname={$config['database']};host={$config['host']};charset=utf8";
         $this->conn = new PDO(
             $dsn, 
             $config['user'], 
             $config['password'],
         [
             PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION
+        ],
+        [
+            PDO::MYSQL_ATTR_INIT_COMMAND => "SET CHARACTER SET UTF8"
         ]
         );
     }

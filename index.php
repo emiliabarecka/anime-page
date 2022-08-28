@@ -1,6 +1,8 @@
 <?php
 declare(strict_types=1);
 
+header('Content-Type: text/html; charset=utf-8');
+
 spl_autoload_register(function(string $classNameSpace){
 $path = str_replace(['\\', 'Ap/'], ['/', ''], $classNameSpace);
 $path = "src/$path.php";
