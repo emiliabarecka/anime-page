@@ -52,6 +52,7 @@ $animes = $params['animes'] ?? null;
                         <a href="/?action=register"  class="nav-link  h5 ms-lg-5"  role="button">Zarejestruj się</a>
                     </li>
                     <?php endif ?>
+                    <?php endif ?>
                     
                 </ul>
             </div>
