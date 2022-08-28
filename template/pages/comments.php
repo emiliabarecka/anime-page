@@ -21,7 +21,7 @@
                         <button type="submit" class="btn btn-success btn-sm m-1">Wyślij</button>
                         </div>
                     </div>
-                
+                    <div><span>nowa gałąź</span></div>
                     </thead>
                     <tbody>
                         <tr><?php if(!empty($params['comments'])):?>
