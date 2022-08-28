@@ -40,18 +40,18 @@ class UserController extends AbstractController{
         if ($this->request->postParam('password') &&
             $this->request->postParam('name')) {    
             $this->logInAction();
-            if($_SESSION['userType'] === 'normal_user'){
+            if(isset($_SESSION['userType']) && $_SESSION['userType'] === 'normal_user'){
                 if(isset($_POST['animeId'])){
                     $this->redirect('/animePage/?action=show&id='.$_POST['animeId'], []);
                 }else{
                      $this->redirect('/animePage', []);
                 }
             }
-            else if($_SESSION['userType'] === 'owner'){
+            else if(isset($_SESSION['userType']) && $_SESSION['userType'] === 'owner'){
                 $this->redirect('/animePage/?action=admin', []);
             }
             else{
-                echo "Nieprawidłowy login lub hasło";
+                echo "<div><p style= 'color:red'>Nieprawidłowy login lub hasło</p></div>";
             }
             
         }
@@ -78,7 +78,7 @@ class UserController extends AbstractController{
             $_SESSION['userName'] = $userData['name'];
             $userData = $this->view->escape($userData);
             $id = $this->userModel->register($userData);
-            $_SESSION['id'] = $id;
+            $_SESSION['userId'] = $id;
             $this->redirect('/animePage', []);
         }
         $this->view->render($page, []);  

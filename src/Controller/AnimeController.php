@@ -35,12 +35,15 @@ class AnimeController extends AbstractController{
         $images = $this->imageModel->getImage($animeId);
         $anime = $this->getAnime();
         $error = $this->request->getParam('error');
+        $commentController = new CommentController($this->request);
         $descriptionPart = $this->animeModel->putImagesToDescription($anime['description_0'], $images);
         
         $viewParams = [
             'anime' => $anime,
             'animeText' => $descriptionPart ?? null,
-            'error' => $error ?? null
+            'error' => $error ?? null,
+            'comments' => $commentController->showComments(),
+            'commentNumber' =>  $commentController->numberOfComments()
         ];
         
         $this->view->render($page, $viewParams ?? []);

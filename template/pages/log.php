@@ -1,4 +1,3 @@
-    <?php dump($_POST)?>
     <div class="row d-flex justify-content-center align-items-center h-100">
       <div class="col col-xl-10 mt-5">
         <div class="card" style="border-radius: 1rem;">
@@ -15,7 +14,7 @@
                   </div>
                   <div class="form-outline mb-4">
                     <?php if(isset($_POST['animeId'])):?>
-                    <input type="text" value="<?php echo $_POST['animeId']?>" name="animeId">
+                    <input type="hidden" value="<?php echo $_POST['animeId']?>" name="animeId">
                     <?php endif ?>
                     <input type="text" id="form2Example17" class="form-control form-control-lg" name="name"/>
                     <label class="form-label" for="form2Example17">login</label>

@@ -59,4 +59,8 @@ class PageController extends AbstractController{
         $imageController = new ImageController($this->request);
         $imageController->deleteImage();  
     }
+    public function sortCommentsAction(): void{
+        $commentController = new CommentController($this->request);
+        $commentController->sortComments();
+    }
 }

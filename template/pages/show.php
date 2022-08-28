@@ -12,6 +12,9 @@ $user = $_SESSION['userType'] ?? null;
             break;
             case 'edited':
                 echo 'Zmodyfikowano anime';
+            break;
+            case 'commented':
+                echo 'Dziekujemy za dodanie komentarza';
             break;  
             }
         }
@@ -56,5 +59,6 @@ $user = $_SESSION['userType'] ?? null;
     </div>   
 </div>
 <?php endif; ?>       
+<?php include_once('addComments.php');?>
 <?php include_once('comments.php');?>
 
