@@ -47,11 +47,11 @@ $animes = $params['animes'] ?? null;
                         <li class="nav-item">
                         <a href="/?action=logIn" class="nav-link h5"  role="button">Zaloguj się</a>    
                     </li>
-                    <?php if($page != 'register'):?>
-                    <li class="nav-item">
-                        <a href="/?action=register"  class="nav-link  h5 ms-lg-5"  role="button">Zarejestruj się</a>
-                    </li>
-                    <?php endif ?>
+                        <?php if($page != 'register'):?>
+                        <li class="nav-item">
+                            <a href="/?action=register"  class="nav-link  h5 ms-lg-5"  role="button">Zarejestruj się</a>
+                        </li>
+                        <?php endif ?>
                     <?php endif ?>
                     
                 </ul>
