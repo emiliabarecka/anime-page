@@ -48,7 +48,7 @@ class AbstractController{
             $this->$action();
         }
         catch(StorageException $e){
-            $page = 'error';
+            $page = 'main';
             $this->view->render($page, [
                 'message' => $e->getMessage()
             ]);
