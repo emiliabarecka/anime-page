@@ -1,10 +1,11 @@
-<?php $images = $params['images'];
+<?php $images = $params['images'] ?? null;
 foreach ($params['animes'] ?? [] as $anime) : ?>
   <div class="row mt-5 gx-5">
     <div class="col-12">
-    <h3><?php echo ($anime['title']) ?></h3>
+      <h3><?php echo ($anime['title']) ?></h3>
     </div>
-      <?php $random = rand(0, (count($images[$anime['id']])) - 1); ?>
+    <?php if($images):?>  
+    <?php $random = rand(0, (count($images[$anime['id']])) - 1); ?>
       <div class="col-12 col-md-6 px-3 ps-lg-3 pe-md-0" >
         <img 
           src="<?php echo $params['directory'] . '\\' . $images[$anime['id']][$random]; ?>" 
@@ -12,6 +13,7 @@ foreach ($params['animes'] ?? [] as $anime) : ?>
           class="img-fluid d-inline mt-3 mx-auto" 
         >
       </div>
+    <?php endif?>
       <div class="col-12 col-md-6">
         <p hidden><?php echo $anime['id'] ?></p>
         <p><?php echo ($anime['description_0']) ?></p>
