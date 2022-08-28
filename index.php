@@ -28,6 +28,7 @@ try{
     (new PageController($request))->run();
 }
 catch (ConfigurationException $e){
+    dump($e);
     echo '<h3>Błąd konfiguracji</h3>';
     echo 'Skontaktuj się z administratorem na adres e-mail : xxx@xxx.com';
 }

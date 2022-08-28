@@ -5,7 +5,7 @@ namespace Ap;
 class View{ 
     const PARAMS_TO_ESCAPE = [
         'animes',
-        'anime'
+        'anime',
     ];
 
     public string $page;

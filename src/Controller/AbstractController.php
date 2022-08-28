@@ -9,6 +9,7 @@ use Ap\Model\AnimeModel;
 use Ap\View;
 use Ap\Model\ImageModel;
 use Ap\Model\UserModel;
+use Ap\Model\CommentModel;
 
 class AbstractController{
     private static array $configuration = [];
@@ -18,6 +19,7 @@ class AbstractController{
     protected AnimeModel $animeModel;
     protected ImageModel $imageModel;
     protected UserModel $userModel;
+    protected CommentModel $commentModel;
 
        //zamiast tworzyc polaczenie z bazą w kocntruktorze robimy metode statytczną
        public static function initConfiguration(array $configuration): void{
@@ -32,6 +34,7 @@ class AbstractController{
         $this->animeModel = new AnimeModel(self::$configuration['db']);
         $this->userModel = new UserModel(self::$configuration['db']);
         $this->imageModel = new ImageModel(self::$configuration['db']);
+        $this->commentModel = new CommentModel(self::$configuration['db']);
         $this->request = $request;
         $this->view = new View();   
     }

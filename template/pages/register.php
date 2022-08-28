@@ -1,91 +1,43 @@
-
-<?php 
-$lang = [
-    'login'     => ['zaloguj', 'log in'],
-    'register'  => ['zarejestruj się', 'sign in'],
-    'name'      => ['imie', 'name'],
-    'password'  => ['hasło', 'password'],
-    'terms'     => ['zgadzam się na warunki usługi', 'i agree all statements in terms of service']         
-];
-$language = $params['lang'];
-
-if($language === 'pol'){
-    $selectedLang = 0;
-}else{
-    $selectedLang = 1;
-}
-
-?>
-
-<section class="vh-100" style="background-color: #eee;">
-  <div class="container h-100">
-    <div class="row d-flex justify-content-center align-items-center h-100">
-      <div class="col-lg-12 col-xl-11">
-        <div class="card text-black" style="border-radius: 25px;">
-          <div class="card-body p-md-5">
-            <div class="row justify-content-center">
-              <div class="col-md-10 col-lg-6 col-xl-5 order-2 order-lg-1">
-
-                <p class="text-center h1 fw-bold mb-5 mx-1 mx-md-4 mt-4"><?php echo $lang['register'][$selectedLang]?></p>
-
-                <form class="mx-1 mx-md-4">
-
-                  <div class="d-flex flex-row align-items-center mb-4">
-                    <i class="fas fa-user fa-lg me-3 fa-fw"></i>
-                    <div class="form-outline flex-fill mb-0">
-                      <input type="text" id="form3Example1c" class="form-control" />
-                      <label class="form-label" for="form3Example1c"><?php echo $lang['login'][$selectedLang]?></label>
-                    </div>
-                  </div>
-
-                  <div class="d-flex flex-row align-items-center mb-4">
-                    <i class="fas fa-envelope fa-lg me-3 fa-fw"></i>
-                    <div class="form-outline flex-fill mb-0">
-                      <input type="email" id="form3Example3c" class="form-control" />
-                      <label class="form-label" for="form3Example3c">Email</label>
-                    </div>
-                  </div>
-
-                  <div class="d-flex flex-row align-items-center mb-4">
-                    <i class="fas fa-lock fa-lg me-3 fa-fw"></i>
-                    <div class="form-outline flex-fill mb-0">
-                      <input type="password" id="form3Example4c" class="form-control" />
-                      <label class="form-label" for="form3Example4c"><?php echo $lang['password'][$selectedLang]?></label>
-                    </div>
-                  </div>
-
-                  <div class="d-flex flex-row align-items-center mb-4">
-                    <i class="fas fa-key fa-lg me-3 fa-fw"></i>
-                    <div class="form-outline flex-fill mb-0">
-                      <input type="password" id="form3Example4cd" class="form-control" />
-                      <label class="form-label" for="form3Example4cd"><?php echo $lang['password'][$selectedLang]?></label>
-                    </div>
-                  </div>
-
-                  <div class="form-check d-flex justify-content-center mb-5">
-                    <input class="form-check-input me-2" type="checkbox" value="" id="form2Example3c" />
-                    <label class="form-check-label" for="form2Example3">
-                    <?php echo $lang['terms'][$selectedLang]?> <a href="#!">gggg</a>
-                    </label>
-                  </div>
-
-                  <div class="d-flex justify-content-center mx-4 mb-3 mb-lg-4">
-                    <button type="button" class="btn btn-primary btn-lg"><?php echo $lang['register'][$selectedLang]?></button>
-                  </div>
-
-                </form>
-
-                </div>
-              
-                <div class="d-flex justify-content-center">
-                    <div><a class="btn btn-primary" href="/animePage/?action=register&lang=pol">POLSKI</a></div>
-                    <div class="btn btn-info ms-3"><a href="/animePage/?action=register&lang=eng">ENGLISH</a></div>
-                </div>    
-              
+<div class="row d-flex justify-content-center align-items-center h-75 mt-5">
+    <div class="col-12 col-md-9 col-lg-7 col-xl-6">
+      <div class="card" style="border-radius: 15px;">
+        <div class="card-body p-5">
+          <p class="text-uppercase text-center mb-5 h4">załóż konto</p>
+          <form method="POST">
+            <div class="form-outline mb-4">
+              <input type="text" id="form3Example1cg" class="form-control form-control-lg" name="name"/>
+              <label class="form-label" for="form3Example1cg" >login</label>
             </div>
-          </div>
+
+            <div class="form-outline mb-4">
+              <input type="email" id="form3Example3cg" class="form-control form-control-lg" name="email"/>
+              <label class="form-label" for="form3Example3cg">email</label>
+            </div>
+
+            <div class="form-outline mb-4">
+              <input type="password" id="form3Example4cg" class="form-control form-control-lg" name="password" />
+              <label class="form-label" for="form3Example4cg">hasło</label>
+            </div>
+
+            <div class="form-outline mb-4">
+              <input type="password" id="form3Example4cdg" class="form-control form-control-lg" name="passwordRepeat"/>
+              <label class="form-label" for="form3Example4cdg">powtórz hasło</label>
+            </div>
+
+            <div class="form-check d-flex justify-content-center mb-5">
+              <input class="form-check-input me-2" type="checkbox" value="" id="form2Example3cg" />
+              <label class="form-check-label" for="form2Example3g">
+                zgadzam się z warunkami zawartymi w <a href="#!" style="color:rgb(183, 188, 191)">polityce rejestracji</a>
+              </label>
+            </div>
+
+            <div class="d-flex justify-content-center">
+              <button type="submit"
+                class="btn btn-success btn-block btn-lg gradient-custom-4 text-body">zarejestruj się</button>
+            </div>
+          </form>
         </div>
       </div>
     </div>
   </div>
-</section>
+  

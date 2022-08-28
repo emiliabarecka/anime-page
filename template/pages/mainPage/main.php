@@ -21,7 +21,6 @@
     ?>
   </div>
 </div>
-
 <?php 
   include_once('headerContent.php');
   include_once('mainContent.php'); 

@@ -1,11 +1,11 @@
 body{
     background-image: url(img/alBackGround.jpg);
-    // background-repeat: no-repeat;
     background-size: cover;
+    background-repeat: no-repeat;
     font-family: 'Nunito Sans';
     color: rgb(183, 188, 191);
     text-align: center;
-}
+
 header{
     background: rgb(23,22,24);
     background: linear-gradient(27deg, rgba(23,22,24,1) 0%, rgba(138,143,143,1) 98%);
@@ -32,29 +32,33 @@ header{
     }
 }
 
-.container{
-    background-color: rgba(0, 0, 0, 0.632);
-    box-shadow: 0px 20px 50px 70px rgb(245, 242, 242);
-    p{
-        text-align: justify; 
-    }
-
-    img{
-    border-radius: 10px;
-    box-shadow: 5px 5px 30px rgba(234, 230, 230, 0.72);
-    }
-    .show{
-    text-align: justify;
-    align-items: center;
-    max-width: 98%;     
+    .container{
+        background-color: rgba(0, 0, 0, 0.632);
+        box-shadow: 0px 20px 50px 70px rgb(245, 242, 242);
         p{
-        text-align: justify;
-        display: inline;
+            text-align: justify; 
+        }
+
+        img{
+            border-radius: 10px;
+            box-shadow: 5px 5px 30px rgba(234, 230, 230, 0.72);
+        }
+        .show{
+            text-align: justify;
+            align-items: center;
+            max-width: 90%;     
+            p{
+                text-align: justify;
+                display: inline;
+            }
+        }
+        .card{
+            background: rgb(23,22,24);
+            background: linear-gradient(27deg, rgba(23,22,24,1) 0%, rgb(91, 93, 93) 98%); 
+            color: rgb(183, 188, 191);
         }
     }
 }
-
-
 /* --------- EDITOR STYLES  ---------------------------------------------------------------------------------------- */
 
 .editor-wrapper {

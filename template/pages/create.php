@@ -1,11 +1,9 @@
 <?php
 $anime = $params['anime'] ?? null;
 $images = $params['img'] ?? null;
-dump($anime['published']);
 ?>
 <div class="row">
   <div class="col">
-    <a href="/"><button class="btn btn-secondary m-3">Powrót</button></a>
   </div>
 </div>
 <form method="post" action="/?action=<?php echo ($anime) ? 'edit' : 'create'?>" enctype="multipart/form-data">
