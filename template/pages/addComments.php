@@ -8,7 +8,7 @@
             <div class="d-flex flex-start w-100">
               <div class="w-100">
                 <p class="h5 my-3">Witaj <?php echo $_SESSION['userName'] ?? null ?> :) Podziel sie z nami swoją opinią.</p>
-                <form method="POST" action="/animePage/?action=addComment">
+                <form method="POST" action="/?action=addComment">
                   <div class="form-outline">
                     <?php if(isset($_SESSION['userType']) && isset($_SESSION['userId']) && isset($_SESSION['userName']) ):?>
                     <input type="hidden" value=<?php echo $_SESSION['userId']?> name="userId">
@@ -27,7 +27,7 @@
                   </div>
                 </form>
                 <?php if(empty($_SESSION['userType'])):?>
-                <form method="POST" action="/animePage/?action=logIn">
+                <form method="POST" action="/?action=logIn">
                     <input type="hidden" value="<?php echo $anime['id']?>" name="animeId">
                   <button type="submit" class="btn btn-success text-uppercase mt-2">Zaloguj się</button>
                 </form>

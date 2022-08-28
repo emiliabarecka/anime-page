@@ -79,7 +79,7 @@ class UserController extends AbstractController{
             $userData = $this->view->escape($userData);
             $id = $this->userModel->register($userData);
             $_SESSION['userId'] = $id;
-            $this->redirect('/animePage', []);
+            $this->redirect('/', []);
         }
         $this->view->render($page, []);  
     }
