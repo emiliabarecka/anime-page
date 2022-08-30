@@ -124,7 +124,7 @@ class AnimeModel extends AbstractModel implements ModelInterface{
                 $descriptionPart[$i] .= '
                 <img src='. $upload_target_dir. '\\' 
                 . $images[$i]['name'].' '
-                .'class="img-fluid  float-start m-3">
+                .'class="img-fluid  float-start my-3 me-3">
                 ';
             }
 

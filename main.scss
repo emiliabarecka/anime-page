@@ -20,6 +20,7 @@ header{
     .navbar-expand-lg .navbar-nav .dropdown-menu{
         border-radius: 10px;
         background-color: rgba(0, 0, 0, 0.721);
+        max-width: fit-content;
         
         .menu-link{
             color: rgb(183, 188, 191);
@@ -45,8 +46,7 @@ header{
         }
         .show{
             text-align: justify;
-            align-items: center;
-            max-width: 90%;     
+            align-items: center;     
             p{
                 text-align: justify;
                 display: inline;

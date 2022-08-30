@@ -27,34 +27,32 @@ $user = $_SESSION['userType'] ?? null;
         <h1 class="my-4"><?php echo $anime['title']?></h1>
     </div>
 </div>
-<div class="row mx-auto">
-    
+<div class="row d-flex justify-content-center mx-md-2"> 
     <?php if(is_array($params['animeText'])):?>
         <?php foreach($params['animeText'] as $text):?>
             <div class="col show">       
-                    <p class="d-inline mx-auto"><?php echo $text; ?></p>
+                    <p class="d-inline"><?php echo $text; ?></p>
             </div>
         <?php endforeach; ?>
         <?php else: echo ('Brak opisu') ?>
-    <?php endif;  ?>
-    
+    <?php endif ?>   
 </div>
 <div class="row mt-3">  
-    <div class="col-md-6">
-        <h3 class="text-start">Postacie:</h3>
-        <ul>
+    <div class="col-md-6 d-md-block d-flex justify-content-sm-start">
+        <h3>Postacie:</h3>
+        <ul class="px-sm-1 px-md-3">
         <?php
         for($i = 0; $i<count($anime['characters'] ?? []); $i++): ?>
             <li class="list-unstyled text-start"><?php echo ($anime['characters'][$i]); ?></li>
-        <?php endfor;?>
+        <?php endfor ?>
         </ul>
     </div>
-    <div class="col-md-6">
-        <h3 class="text-start">Odcinki:</h3>
-        <ul>
+    <div class="col-md-6 d-md-block d-flex justify-content-sm-start">
+        <h3>Odcinki:</h3>
+        <ul class="px-sm-1 px-md-3">
         <?php for($i = 0; $i < count($anime['episodes'] ?? []); $i++): ?>
             <li class="list-unstyled text-start"><?php echo ($anime['episodes'][$i]); ?></li>
-        <?php endfor;?>
+        <?php endfor ?>
         </ul>
     </div>   
 </div>

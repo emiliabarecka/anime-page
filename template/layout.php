@@ -7,7 +7,7 @@ $animes = $params['animes'] ?? null;
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Najlepsze anime</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
     <link rel="stylesheet" href="main.css">
     <link href="https://fonts.googleapis.com/css2?family=Courgette&family=Nunito+Sans:wght@400;700;800;900&family=Ubuntu:ital,wght@0,300;0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
@@ -25,16 +25,16 @@ $animes = $params['animes'] ?? null;
                     <li class="nav-item">
                     <?php if($animes):?>
                         <a href="/" class="nav-link dropdown-toggle h5 ms-lg-5" data-toggle="dropdown" role="button" >Anime</a>
-                        <div class="w-40 dropdown-menu animeMenu p-2">
+                        <div class="dropdown-menu animeMenu ps-2">
                             <?php foreach($animes as $anime):?>
-                                <p><a href="/?action=show&id=<?php echo $anime['id']?>" class="menu-link text-decoration-none py-4">
+                                <p><a href="/?action=show&id=<?php echo $anime['id']?>" class="menu-link text-decoration-none  py-sm-2 py-md-4">
                                 <?php echo $anime['title']?></a></p> 
                             <?php endforeach ?>    
                         </div>
                     </li>
                     <li class="nav-item">
                         <a href="#" class="nav-link dropdown-toggle h5 ms-lg-5" data-toggle="dropdown" role="button">Postacie</a>
-                        <div class="dropdown-menu animeMenu p2">
+                        <div class="dropdown-menu animeMenu">
                             <p style="color: rgb(183, 188, 191)">Pracujemy nad tym :)</p>
                         </div>
                     </li> 

@@ -25,6 +25,9 @@ body header a > span:hover, body header .navbar-dark .navbar-nav .nav-link:hover
 body header .navbar-expand-lg .navbar-nav .dropdown-menu {
   border-radius: 10px;
   background-color: rgba(0, 0, 0, 0.721);
+  max-width: -webkit-fit-content;
+  max-width: -moz-fit-content;
+  max-width: fit-content;
 }
 
 body header .navbar-expand-lg .navbar-nav .dropdown-menu .menu-link {
@@ -58,7 +61,6 @@ body .container .show {
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
-  max-width: 90%;
 }
 
 body .container .show p {
