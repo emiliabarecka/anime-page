@@ -42,7 +42,7 @@ class AnimeModel extends AbstractModel implements ModelInterface{
             if($user){
                 $query = "SELECT id, title, description_0, published, LEFT(description_0, 800) AS description_0 FROM animes";
             }else{
-                $query = "SELECT id, title, published, LEFT(description_0, 800) AS description_0 FROM animes WHERE published != 0";
+                $query = "SELECT id, title, published, LEFT(description_0, 600) AS description_0 FROM animes WHERE published != 0";
             }
             
             $result = $this->conn->query($query);

@@ -63,7 +63,8 @@ class UserController extends AbstractController{
         $userData = [];
         
         if($this->request->hasPost() && 
-        $this->request->postParam('password') === $this->request->postParam('passwordRepeat')
+        $this->request->postParam('password') === $this->request->postParam('passwordRepeat')&&
+        $this->request->postParam('email') != ""
         ){
             $userData = [
                 'name' => $this->request->postParam('name'),
@@ -85,8 +86,7 @@ class UserController extends AbstractController{
     }
 
     public function logOut():void{
-        session_unset();
-        
+        session_unset();  
         $this->redirect('/?action=main', []);
     }
 }

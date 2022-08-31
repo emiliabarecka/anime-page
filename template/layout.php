@@ -15,7 +15,7 @@ $animes = $params['animes'] ?? null;
 <body>
 <div class="container">
     <header>
-        <nav class="navbar navbar-dark navbar-expand-lg ">
+        <nav class="navbar navbar-dark navbar-expand-lg">
             <a href="/" class="navbar-brand "><img src= "img/logo_transparent.png" width="40" alt="logo" class="d-inline-block ms-5 me-3"><span class="ps-3 fw-bold">Best-anime.pl</span></a>
             <button class="navbar-toggler me-2" type="button" data-toggle = "collapse" data-target = "#mainMenu">
                 <span class="navbar-toggler-icon"></span>
@@ -33,7 +33,7 @@ $animes = $params['animes'] ?? null;
                         </div>
                     </li>
                     <li class="nav-item">
-                        <a href="#" class="nav-link dropdown-toggle h5 ms-lg-5" data-toggle="dropdown" role="button">Postacie</a>
+                        <a href="#" class="nav-link dropdown-toggle h5 mx-md-5" data-toggle="dropdown" role="button">Postacie</a>
                         <div class="dropdown-menu animeMenu">
                             <p style="color: rgb(183, 188, 191)">Pracujemy nad tym :)</p>
                         </div>
@@ -44,7 +44,7 @@ $animes = $params['animes'] ?? null;
                             <a href="/?action=logOut"  class="nav-link h5 ms-lg-5"  role="button">Wyloguj się <?php echo $_SESSION['userName'] ?? null ?></a>
                         </li>
                     <?php else: ?>
-                        <li class="nav-item">
+                        <li class="nav-item ms-md-5">
                         <a href="/?action=logIn" class="nav-link h5"  role="button">Zaloguj się</a>    
                     </li>
                         <?php if($page != 'register'):?>
@@ -59,11 +59,11 @@ $animes = $params['animes'] ?? null;
         </nav>
     </header>
     <div class="row">
-        <div class="d-none d-lg-block col-lg-2" > <img src="/img/wei.jpg" alt="zdjecie" class="img-fluid mt-5"></div>    
-        <div class="col-sm-12 col-lg-8">
+        <div class="d-none d-lg-block col-lg-2" > <img src="/img/wei.jpg" alt="zdjecie" class="img-fluid mt-5 mb-5"></div>    
+        <div class="col-sm-12 col-lg-8 px-sm-5">
         <?php include("template/pages/$page.php")?>
         </div>
-        <div class="d-none d-lg-block col-lg-2" ><img src="img/wangji.jpg" alt="zdjecie" class="img-fluid mt-5"></div>   
+        <div class="d-none d-lg-block col-lg-2" ><img src="img/wangji.jpg" alt="zdjecie" class="img-fluid mt-5 mb-5"></div>   
     </div>
     <div class="row">
         <div class="col text-center py-5">STOPKA</div>

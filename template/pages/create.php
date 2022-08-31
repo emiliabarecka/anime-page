@@ -49,7 +49,7 @@ $images = $params['img'] ?? null;
         <fieldset>
           <div class="my-3">
             <input type="file" name="img" class="image-input" class="w-75">
-            <input type="text" value="<?php echo $img['name']; ?>">
+            <input type="text" value="<?php echo $img['name'];?>">
             <input type="hidden" name="id" value="<?php echo($img) ? $img['id'] : null;?>" class="w-25">
           </div>
         </fieldset>

@@ -4,7 +4,7 @@
           <div class="row g-0">
             <div class="col-md-6 col-lg-5 d-none d-md-block">
               <img src="uploaded/welcome.jpg"
-                alt="login form" class="img-fluid mt-5" style="border-radius: 10px;" />
+                alt="login form" class="img-fluid mt-5 mx-1" style="border-radius: 10px;" />
             </div>
             <div class="col-md-6 col-lg-7 d-flex align-items-center">
               <div class="card-body">

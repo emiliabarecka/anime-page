@@ -2,6 +2,23 @@
 $anime = $params['anime'] ?? null;
 $user = $_SESSION['userType'] ?? null;
 ?>
+<div class="row error text-uppercase p-3" style="color:yellow">
+    <div class="col">
+        <?php
+        if(!empty($_GET['error'])){
+                switch($_GET['error']){
+                    case 'insertImage':
+                        echo 'Nie udało sie dodać obrazu';
+                    break;    
+                    case 'editImage':
+                        echo 'Nie udało sie edytować obrazu';
+                    break;
+
+                }
+            }
+        ?>
+    </div>
+</div>
 <div class=" row message my-2" style="color:green">
     <div class="col">
     <?php
@@ -15,19 +32,22 @@ $user = $_SESSION['userType'] ?? null;
             break;
             case 'commented':
                 echo 'Dziekujemy za dodanie komentarza';
-            break;  
+            break;
+            case 'picture':
+                echo 'wybierz obrazek';
+            break;    
             }
         }
         ?>
     </div>     
 </div>
 <?php if($anime): ?>
-<div class="row">
+<div class="row main">
     <div class="col">
         <h1 class="my-4"><?php echo $anime['title']?></h1>
     </div>
 </div>
-<div class="row d-flex justify-content-center mx-md-2"> 
+<div class="row d-flex justify-content-center main"> 
     <?php if(is_array($params['animeText'])):?>
         <?php foreach($params['animeText'] as $text):?>
             <div class="col show">       
@@ -37,10 +57,10 @@ $user = $_SESSION['userType'] ?? null;
         <?php else: echo ('Brak opisu') ?>
     <?php endif ?>   
 </div>
-<div class="row mt-3">  
+<div class="row mt-3 main">  
     <div class="col-md-6 d-md-block d-flex justify-content-sm-start">
         <h3>Postacie:</h3>
-        <ul class="px-sm-1 px-md-3">
+        <ul class="px-sm-1">
         <?php
         for($i = 0; $i<count($anime['characters'] ?? []); $i++): ?>
             <li class="list-unstyled text-start"><?php echo ($anime['characters'][$i]); ?></li>
@@ -49,7 +69,7 @@ $user = $_SESSION['userType'] ?? null;
     </div>
     <div class="col-md-6 d-md-block d-flex justify-content-sm-start">
         <h3>Odcinki:</h3>
-        <ul class="px-sm-1 px-md-3">
+        <ul class="px-sm-1">
         <?php for($i = 0; $i < count($anime['episodes'] ?? []); $i++): ?>
             <li class="list-unstyled text-start"><?php echo ($anime['episodes'][$i]); ?></li>
         <?php endfor ?>

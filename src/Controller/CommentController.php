@@ -46,7 +46,7 @@ class CommentController extends AbstractController{
                 $sortBy = 'asc';
             }
         }else{
-            $sortBy = 'asc';
+            $sortBy = 'desc';
         }
         return $sortBy;
         

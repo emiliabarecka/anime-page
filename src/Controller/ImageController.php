@@ -24,8 +24,9 @@ class ImageController extends AbstractController{
         return $images;
     }
     public function insertImage():void{
-        if($this->request->isPost()){
-            $animeId = (int)$this->request->getParam('id');
+        $animeId = (int)$this->request->getParam('id');
+
+        if($this->request->hasPost() && !empty($_FILES['img']['name'])){
             $img = $_FILES['img'];
             $home_dir = dirname(__FILE__);    
             $upload_target_dir = "$home_dir\..\uploaded";
@@ -40,16 +41,22 @@ class ImageController extends AbstractController{
             ];
             $this->imageModel->insertImage($imageData);
             $this->redirect('/?action=show&id='.$animeId, ['before'=>'edited']);
+        }else{
+            $this->redirect('/?action=show&id='.$animeId, ['error'=>'insertImage']);
         }
+
     }
     
     public function editImage():void{
-        if($this->request->isPost()){
-            $animeId = (int)$this->request->getParam('id');
+        $animeId = (int)$this->request->getParam('id');
+
+        if($this->request->hasPost() && !empty($_FILES['img']['name'])){
             $id = (int)$this->request->postParam('id');
             $imgName = $_FILES['img']['name'];
             $this->imageModel->edit($id, $imgName);
             $this->redirect('/?action=show&id='.$animeId, ['before'=>'edited']);
+        }else{
+            $this->redirect('/?action=show&id='.$animeId, ['error'=>'editImage']);
         }
     }
     public function deleteImage():void{

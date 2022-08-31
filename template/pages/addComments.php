@@ -1,7 +1,7 @@
 <?php 
  
 ?>
-    <div class="row d-flex justify-content-center">
+    <div class="row d-flex justify-content-center main">
       <div class="col-md-10 col-lg-10 col-xl-10 mt-2">
         <div class="card">
           <div class="card-body p-2">
@@ -15,7 +15,7 @@
                     <input type="hidden" id = "userType" value=<?php echo (isset($_SESSION['userType'])) ? $_SESSION['userType'] : null ?> name="userType">
                     <input type="hidden" value=<?php echo $_SESSION['userName']?> name="name">
                     <div class="d-flex justify-content-between mt-3">
-                    <button type="submit" class="btn btn-success">
+                    <button type="submit" class="btn btn-success btn-small mb-2">
                       Dodaj komentarz
                     </button>
                     </div>
@@ -29,7 +29,7 @@
                 <?php if(empty($_SESSION['userType'])):?>
                 <form method="POST" action="/?action=logIn">
                     <input type="hidden" value="<?php echo $anime['id']?>" name="animeId">
-                  <button type="submit" class="btn btn-success text-uppercase mt-2">Zaloguj się</button>
+                  <button type="submit" class="btn btn-success btn-small mt-2">Zaloguj się</button>
                 </form>
                 <?php endif ?>
               </div>
