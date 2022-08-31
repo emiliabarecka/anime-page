@@ -31,8 +31,7 @@ class View{
                 $clearParams[$key] = htmlentities($param); 
             }
             else {
-                // $clearParams[$key] = htmlspecialchars($param, ENT_QUOTES, 'UTF-8');
-                $clearParams[$key] = preg_replace('/\s+/', ' ', $param);    
+                // $clearParams[$key] = preg_replace('/\s+/', ' ', $param);    
             } 
         }
         return $clearParams;
