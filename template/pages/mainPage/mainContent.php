@@ -15,8 +15,8 @@ foreach ($params['animes'] ?? [] as $anime) : ?>
       </div>
     <?php endif?>
       <div class="col-sm-12 col-md-6 p-3 main">
-        <p hidden><?php echo $anime['id'] ?></p>
         <p class="p-sm-3"><?php echo ($anime['description_0']) ?></p>
+        <p hidden><?php echo $anime['id'] ?></p>
         <a href="/?action=show&id=<?php echo $anime['id']; ?>" role="button" class="btn btn-secondary">Więcej</a>
     <?php if (!empty($_SESSION['userType']) && $_SESSION['userType'] === 'owner') : ?>
           <a href="/?action=edit&id=<?php echo $anime['id'] ?>"><button class="btn btn-secondary">Edytuj</button></a>
