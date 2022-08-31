@@ -2,11 +2,11 @@
 foreach ($params['animes'] ?? [] as $anime) : ?>
   <div class="row mt-5">
     <div class="col-12 main">
-      <h3 class="text-decoration-underline pt-3"><?php echo ($anime['title']) ?></h3>
+      <h3 class="pt-3"><?php echo ($anime['title']) ?></h3>
     </div>
     <?php if($images):?>  
     <?php $random = rand(0, (count($images[$anime['id']])) - 1); ?>
-      <div class="col-sm-12 col-md-6 px-3 ps-lg-3 mx-auto" >
+      <div class="col-sm-12 col-md-6 ps-lg-3 mx-auto main" >
         <img 
           src="<?php echo $params['directory'] . '\\' . $images[$anime['id']][$random]; ?>" 
           alt="zdjęcie z postaciami z anime" 

@@ -44,10 +44,10 @@ $user = $_SESSION['userType'] ?? null;
 <?php if($anime): ?>
 <div class="row main">
     <div class="col">
-        <h1 class="my-4"><?php echo $anime['title']?></h1>
+        <h1 class="my-2 pt-2"><?php echo $anime['title']?></h1>
     </div>
 </div>
-<div class="row d-flex justify-content-center main"> 
+<div class="row d-flex justify-content-center main pt-3"> 
     <?php if(is_array($params['animeText'])):?>
         <?php foreach($params['animeText'] as $text):?>
             <div class="col show">       
