@@ -40,22 +40,22 @@ class AnimeModel extends AbstractModel implements ModelInterface{
     public function getAnimes(null| string $user):array{
         try{
             if($user){
-                $query = "SELECT id, title, description_0, published, LEFT(description_0, 800) AS description_0 FROM animes";
+                $query = "SELECT id, title, published,  LEFT(description_0, 800) AS description_0 FROM animes";
             }else{
                 $query = "SELECT id, title, published, LEFT(description_0, 600) AS description_0 FROM animes WHERE published != 0";
             }
             
             $result = $this->conn->query($query);
             $animes = $result->fetchAll(PDO::FETCH_ASSOC);
-            
+
             foreach($animes as $key => $anime){
                 $animes[$key]['id'] = (string)$animes[$key]['id'];
+                $animes[$key]['published'] = (string)$animes[$key]['published'];
                 if(str_contains($anime['description_0'], '#image')){
-                    $animes[$key]['description_0'] = str_replace('#image','', $anime['description_0']);
-                    $animes[$key]['published'] = (string)$animes[$key]['published'];
+                    $animes[$key]['description_0'] = str_replace('#image','', $anime['description_0']);   
                 }
              } 
-
+             
             return $animes;
         }
         catch(Throwable $e){
@@ -70,9 +70,10 @@ class AnimeModel extends AbstractModel implements ModelInterface{
             $desc = $this->conn->quote($data['desc']);
             $characters = $this->conn->quote($data['characters']);
             $eps = $this->conn->quote($data['eps']);
-            
-            $query = "INSERT INTO animes (title, description_0, characters, episodes)
-                      VALUES($title, $desc, $characters, $eps)";
+            $published = (string)($data['published']);
+ 
+            $query = "INSERT INTO animes (title, description_0, characters, episodes, published)
+                      VALUES($title, $desc, $characters, $eps, $published)";
             $this->conn->exec($query);
             return (int)$this->conn->lastInsertId();
             
@@ -117,7 +118,7 @@ class AnimeModel extends AbstractModel implements ModelInterface{
     public function putImagesToDescription(string $desc, array $images): array{
         $upload_target_dir = basename("\uploaded");
 
-        if (str_contains($desc, '#image')) {
+        if (str_contains($desc, '#image') && $images) {
             $descriptionPart = explode('#image', $desc);
 
             for ($i = 0; $i < count($descriptionPart) -1; $i++) {

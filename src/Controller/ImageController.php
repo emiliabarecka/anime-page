@@ -20,7 +20,7 @@ class ImageController extends AbstractController{
             foreach($image as  $img){
                 $images[$id][] = $img['name'];
             }
-        };
+        }
         return $images;
     }
     public function insertImage():void{

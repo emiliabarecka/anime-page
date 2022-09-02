@@ -23,7 +23,7 @@ class AnimeController extends AbstractController{
 
         $viewParams = [
             'animes' =>  $this->animeModel->getAnimes($user),
-            'images' => $images ?? null,
+            'images' => $images ?? [],
             'directory' => $upload_target_dir,
             'id' => $id ?? null
         ];    

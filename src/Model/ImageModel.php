@@ -10,7 +10,6 @@ class ImageModel extends AbstractModel{
 
     public function insertImage(array $data):void{
         try{
-   
             $imgName = $_FILES['img']['name'];
             $animeId = $data['id'];
             $title = $this->conn->quote($data['title']);
