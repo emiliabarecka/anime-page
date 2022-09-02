@@ -55,7 +55,8 @@ class AnimeModel extends AbstractModel implements ModelInterface{
                     $animes[$key]['description_0'] = str_replace('#image','', $anime['description_0']);   
                 }
              } 
-             
+             dump($animes);
+             exit();
             return $animes;
         }
         catch(Throwable $e){
