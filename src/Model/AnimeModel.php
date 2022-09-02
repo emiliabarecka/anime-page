@@ -118,7 +118,7 @@ class AnimeModel extends AbstractModel implements ModelInterface{
     public function putImagesToDescription(string $desc, array $images): array{
         $upload_target_dir = basename("\uploaded");
 
-        if (str_contains($desc, '#image') && $images) {
+        if (str_contains($desc, '#image')) {
             $descriptionPart = explode('#image', $desc);
 
             for ($i = 0; $i < count($descriptionPart) -1; $i++) {
