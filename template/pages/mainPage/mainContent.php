@@ -4,7 +4,7 @@ foreach ($params['animes'] ?? [] as $anime) : ?>
     <div class="col-12 main">
       <h3 class="pt-3"><?php echo ($anime['title']) ?></h3>
     </div>
-    <?php if($images):?>  
+    <?php if(!empty($images[$anime['id']])):?>  
     <?php $random = rand(0, (count($images[$anime['id']])) - 1); ?>
       <div class="col-sm-12 col-md-6 ps-lg-3 mx-auto main" >
         <img 
