@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
 namespace Ap;
-//ta page jest actionem od geta
+
 class View{ 
     const PARAMS_TO_ESCAPE = [
         'animes',
@@ -37,5 +37,3 @@ class View{
         }
     }
 }
-
-

@@ -1,4 +1,4 @@
-<?php $images = $params['images'] ?? null;
+<?php $images = $params['images'] ?? [];
 foreach ($params['animes'] ?? [] as $anime) : ?>
   <div class="row mt-5">
     <div class="col-12 main">
