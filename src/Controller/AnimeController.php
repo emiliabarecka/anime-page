@@ -26,7 +26,8 @@ class AnimeController extends AbstractController{
             'images' => $images ?? [],
             'directory' => $upload_target_dir,
             'id' => $id ?? null
-        ];    
+        ]; 
+          
         $this->view->render($page, $viewParams ?? []);
     }
 
