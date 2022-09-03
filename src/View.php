@@ -31,7 +31,7 @@ class View
 
             if (is_array($param)) {
                 $clearParams[$key] = $this->escape($param);
-            } elseif ($key !== 'description_0') {
+            } elseif (!$key === 'description_0') {
                 $clearParams[$key] = htmlentities($param);
             } else {
                 $clearParams[$key] = preg_replace('/\s+/', ' ', $param);

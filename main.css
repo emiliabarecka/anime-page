@@ -2,6 +2,7 @@ body {
   background-image: url(img/alBackGround.jpg);
   background-size: cover;
   background-repeat: no-repeat;
+  background-position: center;
   font-family: 'Nunito Sans';
   color: #b7bcbf;
   text-align: center;
@@ -50,7 +51,7 @@ body .container p {
 }
 
 body .container .main {
-  background-color: rgba(0, 0, 0, 0.362);
+  background-color: rgba(0, 0, 0, 0.469);
   padding: 0 10px 10px 10px;
   border-bottom: 1px solid black;
 }
