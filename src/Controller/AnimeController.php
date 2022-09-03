@@ -1,23 +1,26 @@
 <?php
+
 declare(strict_types=1);
+
 namespace Ap\Controller;
 
 use Ap\Model\ImageModel;
 
-class AnimeController extends AbstractController{
+class AnimeController extends AbstractController
+{
 
-    public function main(): void{
+    public function main(): void
+    {
         $page = 'mainPage/main';
 
         $id = $this->request->getParam('id');
         $imageController = new ImageController($this->request);
         $images = $imageController->showImages();
-        //dobra sciezka bez upublicznienia struktory plikow
         $upload_target_dir = basename("\uploaded");
-        // $upload_target_dir = basename(getcwd()."\uploaded");
-        if(isset($_SESSION['userType']) && $_SESSION['userType'] === 'owner'){
+
+        if (isset($_SESSION['userType']) && $_SESSION['userType'] === 'owner') {
             $user = 'owner';
-        }else{
+        } else {
             $user = null;
         }
 
@@ -26,12 +29,13 @@ class AnimeController extends AbstractController{
             'images' => $images ?? [],
             'directory' => $upload_target_dir,
             'id' => $id ?? null
-        ]; 
-          
+        ];
+
         $this->view->render($page, $viewParams ?? []);
     }
 
-    public function show():  void{
+    public function show(): void
+    {
         $page = 'show';
         $animeId = (int)$this->request->getParam('id');
         $images = $this->imageModel->getImage($animeId);
@@ -39,7 +43,7 @@ class AnimeController extends AbstractController{
         $error = $this->request->getParam('error');
         $commentController = new CommentController($this->request);
         $descriptionPart = $this->animeModel->putImagesToDescription($anime['description_0'], $images);
-        
+
         $viewParams = [
             'anime' => $anime,
             'animeText' => $descriptionPart ?? null,
@@ -47,36 +51,39 @@ class AnimeController extends AbstractController{
             'comments' => $commentController->showComments(),
             'commentNumber' =>  $commentController->numberOfComments()
         ];
-        
+
         $this->view->render($page, $viewParams ?? []);
     }
 
-    public function create(): void{
-        if(isset($_SESSION) && $_SESSION['userType'] === 'owner'){
-            $page = 'create';        
+    public function create(): void
+    {
+        if (isset($_SESSION) && $_SESSION['userType'] === 'owner') {
+            $page = 'create';
             $animeData = [
                 'title' => $this->request->postParam('title'),
                 'desc' => $this->request->postParam('desc'),
                 'characters' => $this->request->postParam('characters'),
-                'eps' => $this->request->postParam('eps'),   
-                ];
-            if($this->request->hasPost() && $this->request->postParam('title')){
-                    $id = $this->animeModel->create($animeData);
-                    $this->redirect('/?action=show&id='.$id, ['before' => 'created']);
-            }   
+                'eps' => $this->request->postParam('eps'),
+            ];
+
+            if ($this->request->hasPost() && $this->request->postParam('title')) {
+                $id = $this->animeModel->create($animeData);
+                $this->redirect('/?action=show&id=' . $id, ['before' => 'created']);
+            }
         }
         $this->view->render($page, $viewParams ?? []);
     }
-    
-    public function edit(): void{
-        $page = 'create'; 
-        if($this->request->isPost()){
+
+    public function edit(): void
+    {
+        $page = 'create';
+
+        if ($this->request->isPost()) {
             $animeId = (int)$this->request->postParam('id');
-            
-            if(!empty($this->request->postParam('published'))){
+
+            if (!empty($this->request->postParam('published'))) {
                 $published = $this->request->postParam('published');
-            }
-            else{
+            } else {
                 $published = $this->request->postParam('ifPublished');
             }
 
@@ -85,15 +92,15 @@ class AnimeController extends AbstractController{
                 'desc' => $this->request->postParam('desc'),
                 'characters' => $this->request->postParam('characters'),
                 'eps' => $this->request->postParam('eps'),
-                'published' => $published  
-            ];   
-            $animeData = $this->view->escape($animeData);  
+                'published' => $published
+            ];
+            $animeData = $this->view->escape($animeData);
             $this->animeModel->edit($animeId, $animeData);
-            $this->redirect('/?action=show&id='.$animeId, ['before'=>'edited']);
-        } 
+            $this->redirect('/?action=show&id=' . $animeId, ['before' => 'edited']);
+        }
         $id = (int)$this->request->getParam('id');
         $img = $this->imageModel->getImage($id);
-        $upload_target_dir = basename("\uploaded"); 
+        $upload_target_dir = basename("\uploaded");
         $viewParams = [
             'anime' => $this->getAnime(),
             'before' => $this->request->getParam('before'),
@@ -102,25 +109,27 @@ class AnimeController extends AbstractController{
         ];
         $this->view->render($page, $viewParams ?? []);
     }
-    public function delete():void{
+    public function delete(): void
+    {
         $page = 'delete';
-        if($this->request->isPost()){
+        if ($this->request->isPost()) {
             $id = (int)$this->request->postParam('id');
             $this->animeModel->delete($id);
             $this->redirect('/?action=main', ['before' => 'deleted']);
         }
         $viewParams = [
             'before' => 'deleted',
-            'anime'=> $this->getAnime()
+            'anime' => $this->getAnime()
         ];
         $this->view->render($page, $viewParams);
     }
-    private function getAnime(): array{
+    private function getAnime(): array
+    {
         $animeId = (int)$this->request->getParam('id');
-        if(!$animeId){
+        
+        if (!$animeId) {
             $this->redirect('/?action=main', ['error' => 'animeNotFound']);
         }
-        return $this->animeModel->get($animeId);     
+        return $this->animeModel->get($animeId);
     }
-    
 }

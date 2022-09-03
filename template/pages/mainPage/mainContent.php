@@ -1,6 +1,6 @@
 <?php $images = $params['images'] ?? [];
 
-foreach ($params['animes'] ?? [] as$key => $anime) : ?>
+foreach ($params['animes'] as $anime) : ?>
   <div class="row mt-5">
     <div class="col-12 main">
       <h3 class="pt-3"><?php echo ($anime['title']) ?></h3>

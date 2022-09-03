@@ -11,10 +11,14 @@ function dump($data){
         display:inline-block;
         padding:1px 10px;
         margin:5px;
-        border: 1px solid black;
+        border: 1px solid lightgreen;
         background-color:black;
-        color:white;">
-        <pre>';
+        color:lightgreen;
+        width:96%;
+        ">
+        <pre style="  
+        word-wrap: break-word;
+        ">';
         print_r($data);
         echo'</pre>
         </div>

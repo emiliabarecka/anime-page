@@ -1,71 +1,76 @@
 <?php
+
 declare(strict_types=1);
+
 namespace Ap\Controller;
+class UserController extends AbstractController
+{
 
-
-class UserController extends AbstractController{
-    
-    public function logInAction(): void{
+    public function logInAction(): void
+    {
         $postUserPassword = $this->request->postParam('password');
         $postUserName = $this->request->postParam('name');
-       
+
         $users = $this->userModel->getUsers();
-        
-        foreach($users as $user){
+
+        foreach ($users as $user) {
             $userName = $user['name'];
             $userPassword = $user['password'];
             $userType = $user['user_type'];
             $userId = $user['id'];
-    
-            if(password_verify($postUserPassword, $userPassword) && $postUserName === $userName){
+
+            if (password_verify($postUserPassword, $userPassword) && $postUserName === $userName) {
                 $_SESSION['userName'] = $userName;
                 $_SESSION['userId'] = $userId;
-                switch($userType){
+                switch ($userType) {
                     case 'owner':
                         $_SESSION['userType'] = 'owner';
                         break;
                     case 'normal_user':
                         $_SESSION['userType'] = 'normal_user';
                         break;
-                    default :
+                    default:
                         $_SESSION['userType'] = null;
-                        $_SESSION['userName'] = null;       
+                        $_SESSION['userName'] = null;
                 }
             }
-        }  
+        }
     }
-    public function logIn(): void{
-        $page = 'log'; 
+    public function logIn(): void
+    {
+        $page = 'log';
 
-        if ($this->request->postParam('password') &&
-            $this->request->postParam('name')) {    
+        if (
+            $this->request->postParam('password') &&
+            $this->request->postParam('name')
+        ) {
             $this->logInAction();
-            if(isset($_SESSION['userType']) && $_SESSION['userType'] === 'normal_user'){
-                if(isset($_POST['animeId'])){
-                    $this->redirect('/?action=show&id='.$_POST['animeId'], []);
-                }else{
-                     $this->redirect('/?action=main', []);
+            
+            if (isset($_SESSION['userType']) && $_SESSION['userType'] === 'normal_user') {
+                if (isset($_POST['animeId'])) {
+                    $this->redirect('/?action=show&id=' . $_POST['animeId'], []);
+                } else {
+                    $this->redirect('/?action=main', []);
                 }
-            }
-            else if(isset($_SESSION['userType']) && $_SESSION['userType'] === 'owner'){
+            } else if (isset($_SESSION['userType']) && $_SESSION['userType'] === 'owner') {
                 $this->redirect('/?action=admin', []);
-            }
-            else{
+            } else {
                 echo "<div><p style= 'color:red'>Nieprawidłowy login lub hasło</p></div>";
             }
-            
         }
-        
-        $this->view->render($page, $viewParams ?? []); 
+
+        $this->view->render($page, $viewParams ?? []);
     }
-    public function register():void{
+    public function register(): void
+    {
         $page = 'register';
         $userData = [];
-        
-        if($this->request->hasPost() && 
-        $this->request->postParam('password') === $this->request->postParam('passwordRepeat')&&
-        $this->request->postParam('email') != ""
-        ){
+
+        if (
+            $this->request->hasPost() &&
+            $this->request->postParam('password') === $this->request->postParam('passwordRepeat') &&
+            $this->request->postParam('email') != ""
+        ) {
             $userData = [
                 'name' => $this->request->postParam('name'),
                 'email' => $this->request->postParam('email'),
@@ -73,8 +78,8 @@ class UserController extends AbstractController{
                 'userType' => 'normal_user'
             ];
         }
-        
-        if(!empty($userData)){
+
+        if (!empty($userData)) {
             $_SESSION['userType'] = 'normal_user';
             $_SESSION['userName'] = $userData['name'];
             $userData = $this->view->escape($userData);
@@ -82,11 +87,12 @@ class UserController extends AbstractController{
             $_SESSION['userId'] = $id;
             $this->redirect('/', []);
         }
-        $this->view->render($page, []);  
+        $this->view->render($page, []);
     }
 
-    public function logOut():void{
-        session_unset();  
+    public function logOut(): void
+    {
+        session_unset();
         $this->redirect('/?action=main', []);
     }
 }

@@ -1,27 +1,27 @@
 <?php
 $anime = $params['anime'] ?? null;
 ?>
-<?php if($anime): ?>
+<?php if ($anime) : ?>
 
-<div class="row">
-    <div class="col">
-        <a href="/"><button class="btn btn-secondary">Powót do strony głównej</button></a>
-    <form method="POST" action="/?action=delete&id=<?php echo $anime['id'] ?>">
-        <input type="hidden" name='id' value="<?php echo $anime['id']?>">
-        <textarea><?php echo $anime['description_0']?>"</textarea>
-        <button class= "btn btn-danger m-5" type="submit" >Usuń</button>
-    </form>
+    <div class="row">
+        <div class="col">
+            <a href="/"><button class="btn btn-secondary">Powót do strony głównej</button></a>
+            <form method="POST" action="/?action=delete&id=<?php echo $anime['id'] ?>">
+                <input type="hidden" name='id' value="<?php echo $anime['id'] ?>">
+                <textarea><?php echo $anime['description_0'] ?>"</textarea>
+                <button class="btn btn-danger m-5" type="submit">Usuń</button>
+            </form>
+        </div>
     </div>
-</div>
-<div class="row">
-    <div class="col">
-        <h2><?php echo ($anime['title']); ?></h2>
+    <div class="row">
+        <div class="col">
+            <h2><?php echo ($anime['title']); ?></h2>
+        </div>
     </div>
-</div>
-<div class="row">
-    <div class="col-lg-4"><img src="img/moDao.webp" alt="img" class="img-fluid"></div>
-    <div class="col-lg-8">
-        <p><?php echo ($anime['description_0']);?></p>
+    <div class="row">
+        <div class="col-lg-4"><img src="img/moDao.webp" alt="img" class="img-fluid"></div>
+        <div class="col-lg-8">
+            <p><?php echo ($anime['description_0']); ?></p>
+        </div>
     </div>
-</div>    
 <?php endif; ?>
